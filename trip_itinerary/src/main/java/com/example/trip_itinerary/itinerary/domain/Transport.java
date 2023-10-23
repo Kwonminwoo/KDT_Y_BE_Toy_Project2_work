@@ -1,10 +1,12 @@
 package com.example.trip_itinerary.itinerary.domain;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 
 @Entity
+@Getter
 @DiscriminatorValue("transport")
 public class Transport extends Itinerary{
     @Id
@@ -25,4 +27,21 @@ public class Transport extends Itinerary{
 
     @Column(name = "end_date", nullable = false)
     private LocalDateTime endDate;
+
+    protected Transport() {}
+
+    private Transport(Long id, String transportation, String startLocation, String endLocation,
+                     LocalDateTime startDate, LocalDateTime endDate) {
+        this.id = id;
+        this.transportation = transportation;
+        this.startLocation = startLocation;
+        this.endLocation = endLocation;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
+
+    public static Transport of(Long id, String transportation, String startLocation, String endLocation,
+                               LocalDateTime startDate, LocalDateTime endDate) {
+        return new Transport(id, transportation, startLocation, endLocation, startDate, endDate);
+    }
 }
