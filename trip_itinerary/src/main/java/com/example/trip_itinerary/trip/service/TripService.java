@@ -6,5 +6,8 @@ import org.springframework.stereotype.Service;
 
 public interface TripService {
     public Trip saveTrip(TripSaveRequest tripSaveRequest);
+    
+    public List<Trip> findAllTrips();
+
 
 }
