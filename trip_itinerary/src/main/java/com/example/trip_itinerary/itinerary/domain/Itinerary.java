@@ -1,5 +1,6 @@
 package com.example.trip_itinerary.itinerary.domain;
 
+import com.example.trip_itinerary.trip.domain.Trip;
 import jakarta.persistence.*;
 import lombok.Getter;
 
@@ -15,21 +16,22 @@ public class Itinerary {
     @Column(nullable = false, length = 30)
     private String name;
 
-    @Column(name = "trip_id", nullable = false)
-    private Long tripId;
+    @ManyToOne
+    @JoinColumn(name = "trip_id", nullable = false)
+    private Trip trip;
 
 
     protected Itinerary(){
     }
 
-    private Itinerary(Long id, String name, Long tripId) {
+    private Itinerary(Long id, String name, Trip trip) {
         this.id = id;
         this.name = name;
-        this.tripId = tripId;
+        this.trip = trip;
     }
 
-    public static Itinerary of(Long id, String name, Long trip_id) {
-        return new Itinerary(id, name, trip_id);
+    public static Itinerary of(Long id, String name, Trip trip) {
+        return new Itinerary(id, name, trip);
     }
 
 }
