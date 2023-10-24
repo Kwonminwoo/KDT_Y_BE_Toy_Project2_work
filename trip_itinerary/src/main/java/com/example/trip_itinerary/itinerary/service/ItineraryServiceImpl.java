@@ -24,6 +24,9 @@ public class ItineraryServiceImpl implements ItineraryService {
 
     @Override
     public Itinerary saveItinerary(ItinerarySaveRequest itinerarySaveRequest) {
+        if (itinerarySaveRequest.getType().equals("이동")) {
+            new Transport(null, (TransportSaveRequest) itinerarySaveRequest.get)
+        }
         Itinerary itinerary = itinerarySaveRequest.toEntity();
         return itineraryRepository.save(itinerary);
     }

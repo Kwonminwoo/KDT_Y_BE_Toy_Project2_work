@@ -1,14 +1,21 @@
 package com.example.trip_itinerary.trip.controller;
 
 
+import com.example.trip_itinerary.itinerary.domain.Itinerary;
 import com.example.trip_itinerary.trip.domain.Trip;
 import com.example.trip_itinerary.trip.dto.request.TripSaveRequest;
+import com.example.trip_itinerary.trip.dto.response.TripFindResponse;
 import com.example.trip_itinerary.trip.service.TripService;
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpHeaders;
+import java.net.http.HttpResponse;
+import java.util.List;
 
 @RestController
 @RequestMapping("/trips")
@@ -21,10 +28,31 @@ public class TripController {
     }
 
     @PostMapping
-    public ResponseEntity saveTrip(TripSaveRequest tripSaveRequest){
+    public ResponseEntity saveTrip(TripSaveRequest tripSaveRequest) {
 
         Trip trip = tripService.saveTrip(tripSaveRequest);
+
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setLocation(URI.create("/test/3"));
+        return new ResponseEntity<>(httpHeaders, HttpStatus.MOVED_PERMANENTLY);
+        // Rest API로 반환을 하는데, 여기서도 리다이렉트 요청을 보낼 수 있나? 많이 사용되는 방식인가?
+        // 헤더 값 변경해서 보낼 수 있던데 써도 되는건가?
         // 리다이렉트
+        저장 -> id 반환 -> "trips/2"
         return new ResponseEntity(null);
+    }
+
+    @GetMapping
+    public List<TripFindResponse> getAllTrips(){
+       return tripService.findAllTrips();
+    }
+
+
+    @GetMapping("/{id}")
+    public ResponseEntity<List<Itinerary>> getDetailTrip(@PathVariable Long id) {
+        Trip tripById = tripService.getTripById(id);
+//        List<Itinerary> itineraries = itineraryService.searchItineraryByTripId(id);
+//        return ResponseEntity.ok(itineraries);
+        return null;
     }
 }

@@ -18,6 +18,7 @@ public class Itinerary {
     @Column(name = "trip_id", nullable = false)
     private Long tripId;
 
+    private String type;
 
     protected Itinerary(){
     }

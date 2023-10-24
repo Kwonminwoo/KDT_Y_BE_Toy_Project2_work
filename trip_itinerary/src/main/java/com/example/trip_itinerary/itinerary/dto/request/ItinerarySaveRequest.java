@@ -13,6 +13,7 @@ import lombok.Setter;
 public class ItinerarySaveRequest {
     private Long id;
     private String name;
+    private String type;
     private Long tripId;
 
     public Itinerary toEntity() {

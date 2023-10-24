@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AccommodationSaveRequest {
+public class AccommodationSaveRequest extends ItinerarySaveRequest{
     private String name;
     private String checkIn;
     private String checkOut;

@@ -20,19 +20,33 @@ public class ItineraryController {
 
     private final ItineraryService itineraryService;
 
-    public ItineraryController(ItineraryService itineraryService) {
+    public ItineraryController(ItineraryService itineraryService){
         this.itineraryService = itineraryService;
     }
 
-    @PostMapping
+    @PostMapping("/{id}")
     public ResponseEntity saveItinerary(ItinerarySaveRequest itinerarySaveRequest){
 
         Itinerary itinerary = itineraryService.saveItinerary(itinerarySaveRequest);
+
         // 리다이렉트
         return new ResponseEntity(null);
     }
 
-    @PostMapping
+    @PostMapping("/transport/{id}")
+
+    public ResponseEntity saveItinerary(TransportSaveRequest transportSaveRequest) {
+        Transport transport = itineraryService.saveTransport(transportSaveRequest);
+        return TranspResponse;
+    }
+
+
+
+
+
+
+
+    @PostMapping("/{id}")
     public ResponseEntity saveAccommodation(AccommodationSaveRequest accommodationSaveRequest) {
 
         Accommodation accommodation = itineraryService.saveAccommodation(accommodationSaveRequest);
@@ -40,7 +54,7 @@ public class ItineraryController {
         return new ResponseEntity(null);
     }
 
-    @PostMapping
+    @PostMapping("/{id}")
     public ResponseEntity saveStay(StaySaveRequest staySaveRequest) {
 
         Stay stay = itineraryService.saveStay(staySaveRequest);
@@ -48,7 +62,7 @@ public class ItineraryController {
         return new ResponseEntity(null);
     }
 
-    @PostMapping
+    @PostMapping("/{id}")
     public ResponseEntity saveTransport(TransportSaveRequest transportSaveRequest) {
 
         Transport transport = itineraryService.saveTransport(transportSaveRequest);

@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class TransportSaveRequest {
+public class TransportSaveRequest  extends ItinerarySaveRequest{
     private Long id;
     private String transportation;
     private String startLocation;
