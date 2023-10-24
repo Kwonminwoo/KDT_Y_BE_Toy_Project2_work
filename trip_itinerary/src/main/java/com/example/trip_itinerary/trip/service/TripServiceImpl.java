@@ -21,4 +21,9 @@ public class TripServiceImpl implements TripService{
         Trip trip = tripSaveRequest.toEntity();
         return tripRepository.save(trip);
     }
+
+    @Override
+    public List<Trip> findAllTrips(){
+        return tripRepository.findAll();
+    }
 }
