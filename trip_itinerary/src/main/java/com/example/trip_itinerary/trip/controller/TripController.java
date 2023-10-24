@@ -3,12 +3,18 @@ package com.example.trip_itinerary.trip.controller;
 
 import com.example.trip_itinerary.trip.domain.Trip;
 import com.example.trip_itinerary.trip.dto.request.TripSaveRequest;
+import com.example.trip_itinerary.trip.dto.response.TripFindResponse;
 import com.example.trip_itinerary.trip.service.TripService;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.io.IOException;
+import java.net.http.HttpResponse;
+import java.util.List;
 
 @RestController
 @RequestMapping("/trips")
@@ -21,18 +27,16 @@ public class TripController {
     }
 
     @PostMapping
-    public ResponseEntity saveTrip(TripSaveRequest tripSaveRequest){
+    public ResponseEntity saveTrip(TripSaveRequest tripSaveRequest) {
 
         Trip trip = tripService.saveTrip(tripSaveRequest);
+
         // 리다이렉트
         return new ResponseEntity(null);
     }
 
     @GetMapping
-    public ResponseEntity<List<Trip>> getAllTrips(){
+    public List<TripFindResponse> getAllTrips(){
        return tripService.findAllTrips();
-
-        //List<Trip> trips = tripService.findAllTrips();
-        //return new ResponseEntity<>(trips, HttpStatus.OK);
     }
 }
