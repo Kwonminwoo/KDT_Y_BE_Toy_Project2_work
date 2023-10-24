@@ -27,4 +27,12 @@ public class TripController {
         // 리다이렉트
         return new ResponseEntity(null);
     }
+
+    @GetMapping
+    public ResponseEntity<List<Trip>> getAllTrips(){
+       return tripService.findAllTrips();
+
+        //List<Trip> trips = tripService.findAllTrips();
+        //return new ResponseEntity<>(trips, HttpStatus.OK);
+    }
 }
