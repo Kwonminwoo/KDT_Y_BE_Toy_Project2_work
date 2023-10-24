@@ -5,7 +5,6 @@ import com.example.trip_itinerary.trip.domain.Trip;
 import com.example.trip_itinerary.trip.dto.request.TripSaveRequest;
 import com.example.trip_itinerary.trip.service.TripService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
