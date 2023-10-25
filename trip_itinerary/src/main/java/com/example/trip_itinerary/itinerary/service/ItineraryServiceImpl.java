@@ -50,11 +50,10 @@ public class ItineraryServiceImpl implements ItineraryService {
             return savedStay.getId();
         }
     }
-    
+
     @Override
     public Long patchItinerary(Long id, ItineraryPatchRequest itineraryPatchRequest) {
         Itinerary foundItinerary = itineraryRepository.findById(id).orElseThrow(NoSuchElementException::new);
-
         if(itineraryPatchRequest instanceof TransportPatchRequest){
             patchTransport((Transport) foundItinerary, (TransportPatchRequest)itineraryPatchRequest);
         }else if(itineraryPatchRequest instanceof AccommodationPatchRequest){
@@ -72,14 +71,12 @@ public class ItineraryServiceImpl implements ItineraryService {
                 transportPatchRequest.getStartDate(), transportPatchRequest.getEndDate());
     }
     private void patchAccommodation(Accommodation accommodation, AccommodationPatchRequest accommodationPatchRequest) {
-        accommodation.updateAccommodation(accommodationPatchRequest.getName(),accommodationPatchRequest.getAccommodationName(),
-                accommodationPatchRequest.getCheckIn(), accommodationPatchRequest.getCheckOut());
+
     }
 
 
     private void patchStay(Stay stay, StayPatchRequest stayPatchRequest) {
-        stay.updateStay(stayPatchRequest.getName(), stayPatchRequest.getLocation(),
-                stayPatchRequest.getStartDate(), stayPatchRequest.getEndDate());
+
     }
 
 }

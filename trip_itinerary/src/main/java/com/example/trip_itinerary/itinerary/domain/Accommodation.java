@@ -33,7 +33,7 @@ public class Accommodation extends Itinerary {
         return new Accommodation(name, trip, accommodationName, checkIn, checkOut);
     }
 
-    public void updateAccommodation(String name, String accommodationName, LocalDateTime checkIn, LocalDateTime checkOut) {
+    public void updateItinerary(String name, String accommodationName, LocalDateTime checkIn, LocalDateTime checkOut) {
         super.updateItinerary(name);
         this.accommodationName = accommodationName;
         this.checkIn = checkIn;
