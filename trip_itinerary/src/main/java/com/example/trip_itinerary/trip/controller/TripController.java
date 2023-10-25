@@ -1,18 +1,16 @@
 package com.example.trip_itinerary.trip.controller;
 
 
+import com.example.trip_itinerary.itinerary.domain.Itinerary;
 import com.example.trip_itinerary.trip.domain.Trip;
+import com.example.trip_itinerary.trip.dto.request.TripPatchRequest;
 import com.example.trip_itinerary.trip.dto.request.TripSaveRequest;
 import com.example.trip_itinerary.trip.dto.response.TripFindResponse;
+import com.example.trip_itinerary.trip.dto.response.TripListFindResponse;
 import com.example.trip_itinerary.trip.service.TripService;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
-import java.net.http.HttpResponse;
 import java.util.List;
 
 @RestController
@@ -26,16 +24,23 @@ public class TripController {
     }
 
     @PostMapping
-    public ResponseEntity saveTrip(TripSaveRequest tripSaveRequest) {
-
+    public Long saveTrip(TripSaveRequest tripSaveRequest) {
         Trip trip = tripService.saveTrip(tripSaveRequest);
-
-        // 리다이렉트
-        return new ResponseEntity(null);
+        return trip.getId();
     }
 
     @GetMapping
-    public List<TripFindResponse> getAllTrips(){
-       return tripService.findAllTrips();
+    public List<TripListFindResponse> getAllTrips(){
+        return tripService.findAllTrips();
+    }
+
+    @GetMapping("/{id}")
+    public TripFindResponse getDetailTripById(@PathVariable Long id) {
+        return tripService.getTripById(id);
+    }
+
+    @PatchMapping("/{id}")
+    public Long patchTripById(@PathVariable Long id, @RequestBody TripPatchRequest tripPatchRequest){
+        return tripService.patchTrip(id, tripPatchRequest);
     }
 }
