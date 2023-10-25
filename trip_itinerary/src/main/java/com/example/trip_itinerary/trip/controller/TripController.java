@@ -29,6 +29,9 @@ public class TripController {
     @PostMapping
     public Long saveTrip(@RequestBody @Validated TripSaveRequest tripSaveRequest) {
 
+        if(tripSaveRequest.getStartDate().isBefore(tripSaveRequest.getEndDate())){
+            throw new RuntimeException();
+        }
         Trip trip = tripService.saveTrip(tripSaveRequest);
         return trip.getId();
     }
