@@ -20,19 +20,19 @@ public class Itinerary {
     @JoinColumn(name = "trip_id", nullable = false)
     private Trip trip;
 
-
     protected Itinerary(){
     }
 
-    private Itinerary(Long id, String name, Trip trip) {
+    protected Itinerary(Long id, String name, Trip trip) {
         this.id = id;
         this.name = name;
         this.trip = trip;
     }
 
-    public static Itinerary of(Long id, String name, Trip trip) {
-        return new Itinerary(id, name, trip);
+    public void updateItinerary(String name){
+        if (name != null) {
+            this.name = name;
+        }
     }
-
 }
 
