@@ -1,11 +1,11 @@
 package com.example.trip_itinerary.trip.service;
 
 import com.example.trip_itinerary.itinerary.domain.Itinerary;
-import com.example.trip_itinerary.itinerary.domain.Transport;
 import com.example.trip_itinerary.trip.domain.Trip;
 import com.example.trip_itinerary.trip.dto.request.TripPatchRequest;
 import com.example.trip_itinerary.trip.dto.request.TripSaveRequest;
 import com.example.trip_itinerary.trip.dto.response.TripFindResponse;
+import com.example.trip_itinerary.trip.dto.response.TripListFindResponse;
 import com.example.trip_itinerary.trip.repository.TripRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -32,36 +32,36 @@ public class TripServiceImpl implements TripService{
     }
 
     @Override
-    public List<TripFindResponse> findAllTrips(){
+    public List<TripListFindResponse> findAllTrips(){
         List<Trip> foundTripList = tripRepository.findAll();
 
-        List<TripFindResponse> tripFindResponseList = new ArrayList<>();
-        for (int i = 0;i < foundTripList.size();i++) {
-            Trip trip = foundTripList.get(i);
-            Itinerary itinerary = trip.getItineraryList().get(i);
+        List<TripListFindResponse> tripFindResponseList = new ArrayList<>();
+        for (Trip foundTrip : foundTripList) {
+            List<String> itineraryNameList = new ArrayList<>();
 
-            ItineraryFindResponse itineraryFindResponse = ItineraryFindResponse.builder()
-                    .name(itinerary.getName())
+            for (Itinerary foundItinerary : foundTrip.getItineraryList()) {
+                itineraryNameList.add(foundItinerary.getName());
+            }
+
+            TripListFindResponse tripListFindResponse = TripListFindResponse.builder()
+                    .id(foundTrip.getId())
+                    .startDate(foundTrip.getStartDate())
+                    .endDate(foundTrip.getEndDate())
+                    .isDomestic(foundTrip.isDomestic())
+                    .itineraryNameList(itineraryNameList)
                     .build();
 
-            TripFindResponse tripFindResponse = TripFindResponse.builder()
-                    .id(trip.getId())
-                    .name(trip.getName())
-                    .startDate(trip.getStartDate())
-                    .endDate(trip.getEndDate())
-                    .isDomestic(trip.isDomestic())
-//                    .itineraryFindResponse(itineraryFindResponse)
-                    .build();
-
-            tripFindResponseList.add(tripFindResponse);
+            tripFindResponseList.add(tripListFindResponse);
         }
 
         return tripFindResponseList;
     }
 
     @Override
-    public Trip getTripById(Long id) {
-        return null;
+    public TripFindResponse getTripById(Long id) {
+        Optional<Trip> foundTripOptional = tripRepository.findById(id);
+        Trip foundTrip = foundTripOptional.orElseThrow(NoSuchElementException::new);
+        return TripFindResponse.fromEntity(foundTrip);
     }
 
     @Override

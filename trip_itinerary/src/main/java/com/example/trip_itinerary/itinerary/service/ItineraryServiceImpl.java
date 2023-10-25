@@ -1,5 +1,6 @@
 package com.example.trip_itinerary.itinerary.service;
 
+
 import com.example.trip_itinerary.itinerary.domain.Accommodation;
 import com.example.trip_itinerary.itinerary.domain.Itinerary;
 import com.example.trip_itinerary.itinerary.domain.Stay;

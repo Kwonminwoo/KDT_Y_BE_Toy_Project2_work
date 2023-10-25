@@ -18,12 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/itineraries")
 public class ItineraryController {
 
-    private final ItineraryService itineraryService;
-
-    public ItineraryController(ItineraryService itineraryService){
-        this.itineraryService = itineraryService;
-    }
-
     @PostMapping("/{id}")
     public ResponseEntity saveItinerary(ItinerarySaveRequest itinerarySaveRequest){
 
