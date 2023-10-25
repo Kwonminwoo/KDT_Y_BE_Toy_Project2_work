@@ -18,18 +18,8 @@ public class ItineraryController {
         this.itineraryService = itineraryService;
     }
 
-    @PostMapping("/{id}/transport")
-    public Long saveItinerary(@RequestBody TransportSaveRequest transportSaveRequest, @PathVariable Long id){
-        return itineraryService.saveItinerary(id, transportSaveRequest);
-    }
-
-    @PostMapping("/{id}/accommodation")
-    public Long saveItinerary(@RequestBody AccommodationSaveRequest accommodationSaveRequest, @PathVariable Long id){
-        return itineraryService.saveItinerary(id, accommodationSaveRequest);
-    }
-
-    @PostMapping("/{id}/stay")
-    public Long saveItinerary(@RequestBody StaySaveRequest staySaveRequest, @PathVariable Long id){
+    @PostMapping("/{id}/itinerary")
+    public Long saveItinerary(@RequestBody ItinerarySaveRequest staySaveRequest, @PathVariable Long id){
         return itineraryService.saveItinerary(id, staySaveRequest);
     }
 
