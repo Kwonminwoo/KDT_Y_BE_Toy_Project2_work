@@ -11,7 +11,6 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-//@AllArgsConstructor
 @NoArgsConstructor
 public class AccommodationPatchRequest extends ItineraryPatchRequest {
     private String accommodationName;
