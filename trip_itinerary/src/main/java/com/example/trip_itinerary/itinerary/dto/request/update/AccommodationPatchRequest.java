@@ -1,8 +1,8 @@
-package com.example.trip_itinerary.itinerary.dto.request;
+package com.example.trip_itinerary.itinerary.dto.request.update;
 
 import com.example.trip_itinerary.itinerary.domain.Accommodation;
+import com.example.trip_itinerary.itinerary.dto.request.ItinerarySaveRequest;
 import com.example.trip_itinerary.trip.domain.Trip;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Setter
 //@AllArgsConstructor
 @NoArgsConstructor
-public class AccommodationSaveRequest extends ItinerarySaveRequest{
+public class AccommodationPatchRequest extends ItineraryPatchRequest {
     private String accommodationName;
     private LocalDateTime checkIn;
     private LocalDateTime checkOut;

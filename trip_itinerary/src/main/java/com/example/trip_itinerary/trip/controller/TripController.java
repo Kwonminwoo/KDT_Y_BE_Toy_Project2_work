@@ -6,15 +6,11 @@ import com.example.trip_itinerary.trip.domain.Trip;
 import com.example.trip_itinerary.trip.dto.request.TripPatchRequest;
 import com.example.trip_itinerary.trip.dto.request.TripSaveRequest;
 import com.example.trip_itinerary.trip.dto.response.TripFindResponse;
+import com.example.trip_itinerary.trip.dto.response.TripListFindResponse;
 import com.example.trip_itinerary.trip.service.TripService;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.ResponseEntity;
-
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.io.IOException;
-import java.net.http.HttpResponse;
 import java.util.List;
 
 @RestController

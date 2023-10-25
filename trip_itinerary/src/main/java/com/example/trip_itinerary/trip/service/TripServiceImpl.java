@@ -1,6 +1,7 @@
 package com.example.trip_itinerary.trip.service;
 
 import com.example.trip_itinerary.itinerary.domain.Itinerary;
+import com.example.trip_itinerary.itinerary.domain.Transport;
 import com.example.trip_itinerary.trip.domain.Trip;
 import com.example.trip_itinerary.trip.dto.request.TripPatchRequest;
 import com.example.trip_itinerary.trip.dto.request.TripSaveRequest;

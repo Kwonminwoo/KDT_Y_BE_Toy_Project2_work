@@ -1,5 +1,6 @@
 package com.example.trip_itinerary.itinerary.domain;
 
+import com.example.trip_itinerary.trip.domain.Trip;
 import jakarta.persistence.*;
 import lombok.Getter;
 
@@ -9,10 +10,6 @@ import java.time.LocalDateTime;
 @Getter
 @DiscriminatorValue("transport")
 public class Transport extends Itinerary{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     @Column(nullable = false, length = 30)
     private String transportation;
 
@@ -30,9 +27,9 @@ public class Transport extends Itinerary{
 
     protected Transport() {}
 
-    private Transport(Long id, String transportation, String startLocation, String endLocation,
-                     LocalDateTime startDate, LocalDateTime endDate) {
-        this.id = id;
+    private Transport(String name, Trip trip, String transportation, String startLocation, String endLocation,
+                      LocalDateTime startDate, LocalDateTime endDate) {
+        super(null, name, trip);
         this.transportation = transportation;
         this.startLocation = startLocation;
         this.endLocation = endLocation;
@@ -40,8 +37,34 @@ public class Transport extends Itinerary{
         this.endDate = endDate;
     }
 
-    public static Transport of(Long id, String transportation, String startLocation, String endLocation,
+    public static Transport of(String name, Trip trip, String transportation, String startLocation, String endLocation,
                                LocalDateTime startDate, LocalDateTime endDate) {
-        return new Transport(id, transportation, startLocation, endLocation, startDate, endDate);
+        return new Transport(name, trip, transportation, startLocation, endLocation, startDate, endDate);
+    }
+
+    public void updateTransport(String name, String transportation, String startLocation,
+                                String endLocation, LocalDateTime startDate, LocalDateTime endDate){
+
+        super.updateItinerary(name);
+
+        if(transportation != null){
+            this.transportation = transportation;
+        }
+
+        if(startLocation != null){
+            this.startLocation = startLocation;
+        }
+
+        if(endLocation != null){
+            this.endLocation = endLocation;
+        }
+
+        if(startDate != null){
+            this.startDate = startDate;
+        }
+
+        if(endDate != null){
+            this.endDate = endDate;
+        }
     }
 }

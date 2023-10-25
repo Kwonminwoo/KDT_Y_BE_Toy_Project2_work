@@ -1,66 +1,40 @@
 package com.example.trip_itinerary.itinerary.controller;
 
-import com.example.trip_itinerary.itinerary.domain.Accommodation;
-import com.example.trip_itinerary.itinerary.domain.Itinerary;
-import com.example.trip_itinerary.itinerary.domain.Stay;
-import com.example.trip_itinerary.itinerary.domain.Transport;
-import com.example.trip_itinerary.itinerary.dto.request.AccommodationSaveRequest;
-import com.example.trip_itinerary.itinerary.dto.request.ItinerarySaveRequest;
-import com.example.trip_itinerary.itinerary.dto.request.StaySaveRequest;
-import com.example.trip_itinerary.itinerary.dto.request.TransportSaveRequest;
+import com.example.trip_itinerary.itinerary.dto.request.*;
+import com.example.trip_itinerary.itinerary.dto.request.update.AccommodationPatchRequest;
+import com.example.trip_itinerary.itinerary.dto.request.update.ItineraryPatchRequest;
+import com.example.trip_itinerary.itinerary.dto.request.update.StayPatchRequest;
+import com.example.trip_itinerary.itinerary.dto.request.update.TransportPatchRequest;
 import com.example.trip_itinerary.itinerary.service.ItineraryService;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/itineraries")
+@RequestMapping("/trips")
 public class ItineraryController {
 
-    @PostMapping("/{id}")
-    public ResponseEntity saveItinerary(ItinerarySaveRequest itinerarySaveRequest){
+    private final ItineraryService itineraryService;
 
-        Itinerary itinerary = itineraryService.saveItinerary(itinerarySaveRequest);
-
-        // 리다이렉트
-        return new ResponseEntity(null);
+    public ItineraryController(ItineraryService itineraryService){
+        this.itineraryService = itineraryService;
     }
 
-    @PostMapping("/transport/{id}")
-
-    public ResponseEntity saveItinerary(TransportSaveRequest transportSaveRequest) {
-        Transport transport = itineraryService.saveTransport(transportSaveRequest);
-        return TranspResponse;
+    @PostMapping("/{id}/transport")
+    public Long saveItinerary(@RequestBody TransportSaveRequest transportSaveRequest, @PathVariable Long id){
+        return itineraryService.saveItinerary(id, transportSaveRequest);
     }
 
-
-
-
-
-
-
-    @PostMapping("/{id}")
-    public ResponseEntity saveAccommodation(AccommodationSaveRequest accommodationSaveRequest) {
-
-        Accommodation accommodation = itineraryService.saveAccommodation(accommodationSaveRequest);
-        // 리다이렉트
-        return new ResponseEntity(null);
+    @PostMapping("/{id}/accommodation")
+    public Long saveItinerary(@RequestBody AccommodationSaveRequest accommodationSaveRequest, @PathVariable Long id){
+        return itineraryService.saveItinerary(id, accommodationSaveRequest);
     }
 
-    @PostMapping("/{id}")
-    public ResponseEntity saveStay(StaySaveRequest staySaveRequest) {
-
-        Stay stay = itineraryService.saveStay(staySaveRequest);
-        // 리다이렉트
-        return new ResponseEntity(null);
+    @PostMapping("/{id}/stay")
+    public Long saveItinerary(@RequestBody StaySaveRequest staySaveRequest, @PathVariable Long id){
+        return itineraryService.saveItinerary(id, staySaveRequest);
     }
 
-    @PostMapping("/{id}")
-    public ResponseEntity saveTransport(TransportSaveRequest transportSaveRequest) {
-
-        Transport transport = itineraryService.saveTransport(transportSaveRequest);
-        // 리다이렉트
-        return new ResponseEntity(null);
+    @PatchMapping("/itineraries/{id}")
+    public Long patchItinerary(@PathVariable Long id, @RequestBody ItineraryPatchRequest itineraryPatchRequest){
+        return itineraryService.patchItinerary(id, itineraryPatchRequest);
     }
 }

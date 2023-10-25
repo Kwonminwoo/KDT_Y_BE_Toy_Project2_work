@@ -1,8 +1,12 @@
-package com.example.trip_itinerary.itinerary.dto.request;
+package com.example.trip_itinerary.itinerary.dto.request.update;
 
 import com.example.trip_itinerary.itinerary.domain.Transport;
+import com.example.trip_itinerary.itinerary.dto.request.ItinerarySaveRequest;
 import com.example.trip_itinerary.trip.domain.Trip;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 
@@ -10,14 +14,14 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @ToString
-public class TransportSaveRequest  extends ItinerarySaveRequest{
+public class TransportPatchRequest extends ItineraryPatchRequest {
     private String transportation;
     private String startLocation;
     private String endLocation;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
 
-    public TransportSaveRequest(String name, String transportation, String startLocation, String endLocation, LocalDateTime startDate, LocalDateTime endDate) {
+    public TransportPatchRequest(String name, String transportation, String startLocation, String endLocation, LocalDateTime startDate, LocalDateTime endDate) {
         super(name);
         this.transportation = transportation;
         this.startLocation = startLocation;

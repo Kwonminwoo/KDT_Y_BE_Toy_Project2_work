@@ -8,10 +8,12 @@ import com.example.trip_itinerary.itinerary.dto.request.AccommodationSaveRequest
 import com.example.trip_itinerary.itinerary.dto.request.ItinerarySaveRequest;
 import com.example.trip_itinerary.itinerary.dto.request.StaySaveRequest;
 import com.example.trip_itinerary.itinerary.dto.request.TransportSaveRequest;
+import com.example.trip_itinerary.itinerary.dto.request.update.AccommodationPatchRequest;
+import com.example.trip_itinerary.itinerary.dto.request.update.ItineraryPatchRequest;
+import com.example.trip_itinerary.itinerary.dto.request.update.StayPatchRequest;
+import com.example.trip_itinerary.itinerary.dto.request.update.TransportPatchRequest;
 
 public interface ItineraryService {
-    public Itinerary saveItinerary(ItinerarySaveRequest itinerarySaveRequest);
-    public Accommodation saveAccommodation(AccommodationSaveRequest accommodationSaveRequest);
-    public Stay saveStay(StaySaveRequest staySaveRequest);
-    public Transport saveTransport(TransportSaveRequest transportSaveRequest);
+    Long saveItinerary(Long id, ItinerarySaveRequest itinerarySaveRequest);
+    Long patchItinerary(Long id, ItineraryPatchRequest itineraryPatchRequest);
 }
