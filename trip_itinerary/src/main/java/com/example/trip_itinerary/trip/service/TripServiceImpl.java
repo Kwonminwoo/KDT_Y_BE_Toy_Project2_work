@@ -1,7 +1,9 @@
 package com.example.trip_itinerary.trip.service;
 
 import com.example.trip_itinerary.itinerary.domain.Itinerary;
+import com.example.trip_itinerary.itinerary.domain.Transport;
 import com.example.trip_itinerary.trip.domain.Trip;
+import com.example.trip_itinerary.trip.dto.request.TripPatchRequest;
 import com.example.trip_itinerary.trip.dto.request.TripSaveRequest;
 import com.example.trip_itinerary.trip.dto.response.TripFindResponse;
 import com.example.trip_itinerary.trip.repository.TripRepository;
@@ -10,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -59,4 +63,13 @@ public class TripServiceImpl implements TripService{
     public Trip getTripById(Long id) {
         return null;
     }
+
+    @Override
+    public Long patchTrip(Long id, TripPatchRequest tripPatchRequest) {
+        Trip foundTrip = tripRepository.findById(id).orElseThrow(NoSuchElementException::new);
+        foundTrip.updateTrip(tripPatchRequest.getName(), tripPatchRequest.getStartDate(),
+                tripPatchRequest.getEndDate(), tripPatchRequest.getIsDomestic());
+        return foundTrip.getId();
+    }
+
 }
