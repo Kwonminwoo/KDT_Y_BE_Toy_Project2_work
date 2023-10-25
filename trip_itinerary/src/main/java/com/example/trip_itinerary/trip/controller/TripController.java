@@ -3,18 +3,13 @@ package com.example.trip_itinerary.trip.controller;
 
 import com.example.trip_itinerary.itinerary.domain.Itinerary;
 import com.example.trip_itinerary.trip.domain.Trip;
+import com.example.trip_itinerary.trip.dto.request.TripPatchRequest;
 import com.example.trip_itinerary.trip.dto.request.TripSaveRequest;
 import com.example.trip_itinerary.trip.dto.response.TripFindResponse;
 import com.example.trip_itinerary.trip.service.TripService;
-import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
-import java.net.URI;
-import java.net.http.HttpHeaders;
-import java.net.http.HttpResponse;
 import java.util.List;
 
 @RestController
@@ -54,5 +49,7 @@ public class TripController {
 //        List<Itinerary> itineraries = itineraryService.searchItineraryByTripId(id);
 //        return ResponseEntity.ok(itineraries);
         return null;
+    public Long patchTripById(@PathVariable Long id, @RequestBody TripPatchRequest tripPatchRequest){
+        return tripService.patchTrip(id, tripPatchRequest);
     }
 }
