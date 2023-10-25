@@ -1,9 +1,11 @@
 package com.example.trip_itinerary.trip.domain;
 
+import com.example.trip_itinerary.itinerary.domain.Itinerary;
 import jakarta.persistence.*;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -23,6 +25,9 @@ public class Trip {
     @Column(name = "is_domestic", nullable = false)
     private boolean isDomestic;
 
+    @OneToMany(mappedBy = "trip")
+    private List<Itinerary> itineraryList;
+
     protected Trip(){
     }
 
@@ -38,4 +43,18 @@ public class Trip {
         return new Trip(id, name, startDate, endDate, isDomestic);
     }
 
+    public void updateTrip(String name, LocalDateTime startDate, LocalDateTime endDate, Boolean isDomestic){
+        if(name != null){
+            this.name = name;
+        }
+        if(startDate != null){
+            this.startDate = startDate;
+        }
+        if (endDate != null) {
+            this.endDate = endDate;
+        }
+        if (isDomestic != null) {
+            this.isDomestic = isDomestic;
+        }
+    }
 }
