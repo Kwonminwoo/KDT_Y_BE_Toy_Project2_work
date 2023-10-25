@@ -20,6 +20,7 @@ public class Itinerary {
     @JoinColumn(name = "trip_id", nullable = false)
     private Trip trip;
 
+    private String type;
 
     protected Itinerary(){
     }

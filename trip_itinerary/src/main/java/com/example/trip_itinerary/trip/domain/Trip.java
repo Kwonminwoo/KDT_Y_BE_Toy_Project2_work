@@ -43,4 +43,18 @@ public class Trip {
         return new Trip(id, name, startDate, endDate, isDomestic);
     }
 
+    public void updateTrip(String name, LocalDateTime startDate, LocalDateTime endDate, Boolean isDomestic){
+        if(name != null){
+            this.name = name;
+        }
+        if(startDate != null){
+            this.startDate = startDate;
+        }
+        if (endDate != null) {
+            this.endDate = endDate;
+        }
+        if (isDomestic != null) {
+            this.isDomestic = isDomestic;
+        }
+    }
 }
