@@ -8,9 +8,12 @@ import com.example.trip_itinerary.trip.dto.request.TripSaveRequest;
 import com.example.trip_itinerary.trip.dto.response.TripFindResponse;
 import com.example.trip_itinerary.trip.dto.response.TripListFindResponse;
 import com.example.trip_itinerary.trip.service.TripService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -24,7 +27,8 @@ public class TripController {
     }
 
     @PostMapping
-    public Long saveTrip(TripSaveRequest tripSaveRequest) {
+    public Long saveTrip(@RequestBody @Validated TripSaveRequest tripSaveRequest) {
+
         Trip trip = tripService.saveTrip(tripSaveRequest);
         return trip.getId();
     }
