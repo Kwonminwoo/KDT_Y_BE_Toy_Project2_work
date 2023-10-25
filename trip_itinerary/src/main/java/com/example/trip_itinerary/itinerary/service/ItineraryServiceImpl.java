@@ -71,12 +71,14 @@ public class ItineraryServiceImpl implements ItineraryService {
                 transportPatchRequest.getStartDate(), transportPatchRequest.getEndDate());
     }
     private void patchAccommodation(Accommodation accommodation, AccommodationPatchRequest accommodationPatchRequest) {
-
+        accommodation.updateAccommodation(accommodationPatchRequest.getName(), accommodationPatchRequest.getAccommodationName(),
+                accommodationPatchRequest.getCheckIn(), accommodationPatchRequest.getCheckOut());
     }
 
 
     private void patchStay(Stay stay, StayPatchRequest stayPatchRequest) {
-
+        stay.updateStay(stayPatchRequest.getName(), stayPatchRequest.getLocation(),
+                stayPatchRequest.getStartDate(), stayPatchRequest.getEndDate());
     }
 
 }
