@@ -4,6 +4,7 @@ import com.example.trip_itinerary.itinerary.domain.Itinerary;
 import jakarta.persistence.*;
 import lombok.Getter;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -17,10 +18,10 @@ public class Trip {
     private String name;
 
     @Column(name = "start_date", nullable = false)
-    private LocalDateTime startDate;
+    private LocalDate startDate;
 
     @Column(name = "end_date", nullable = false)
-    private LocalDateTime endDate;
+    private LocalDate endDate;
 
     @Column(name = "is_domestic", nullable = false)
     private boolean isDomestic;
@@ -31,7 +32,7 @@ public class Trip {
     protected Trip(){
     }
 
-    private Trip(Long id, String name, LocalDateTime startDate, LocalDateTime endDate, boolean isDomestic) {
+    private Trip(Long id, String name, LocalDate startDate, LocalDate endDate, boolean isDomestic) {
         this.id = id;
         this.name = name;
         this.startDate = startDate;
@@ -39,11 +40,11 @@ public class Trip {
         this.isDomestic = isDomestic;
     }
 
-    public static Trip of(Long id, String name, LocalDateTime startDate, LocalDateTime endDate, boolean isDomestic) {
+    public static Trip of(Long id, String name, LocalDate startDate, LocalDate endDate, boolean isDomestic) {
         return new Trip(id, name, startDate, endDate, isDomestic);
     }
 
-    public void updateTrip(String name, LocalDateTime startDate, LocalDateTime endDate, Boolean isDomestic){
+    public void updateTrip(String name, LocalDate startDate, LocalDate endDate, Boolean isDomestic){
         if(name != null){
             this.name = name;
         }

@@ -22,8 +22,8 @@ import java.util.List;
 public class TripFindResponse {
     private Long id;
     private String name;
-    private LocalDateTime startDate;
-    private LocalDateTime endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private boolean isDomestic;
     private List<ItineraryFindResponse> itineraryList;
 

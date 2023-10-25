@@ -15,10 +15,11 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class TripSaveRequest {
     private String name;
-    private LocalDateTime startDate;
-    private LocalDateTime endDate;
-    private boolean isDomestic;
 
+    @NotNull(message = "여행의 시작 날짜를 입력해주세요.")
+    private LocalDate startDate;
+
+    private LocalDate endDate;
     public Trip toEntity(){
         return Trip.of(null, name, startDate, endDate, isDomestic);
     }
