@@ -28,22 +28,22 @@ public class Transport extends Itinerary{
     protected Transport() {}
 
     private Transport(String name, Trip trip, String transportation, String startLocation, String endLocation,
-                      LocalDateTime startDate, LocalDateTime endDate) {
+                      LocalDateTime startDate, LocalDateTime endDateTime) {
         super(null, name, trip);
         this.transportation = transportation;
         this.startLocation = startLocation;
         this.endLocation = endLocation;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.startDateTime = startDate;
+        this.endDateTime = endDateTime;
     }
 
     public static Transport of(String name, Trip trip, String transportation, String startLocation, String endLocation,
-                               LocalDateTime startDate, LocalDateTime endDate) {
-        return new Transport(name, trip, transportation, startLocation, endLocation, startDate, endDate);
+                               LocalDateTime startDateTime, LocalDateTime endDateTime) {
+        return new Transport(name, trip, transportation, startLocation, endLocation, startDateTime, endDateTime);
     }
 
     public void updateTransport(String name, String transportation, String startLocation,
-                                String endLocation, LocalDateTime startDate, LocalDateTime endDate){
+                                String endLocation, LocalDateTime startDateTime, LocalDateTime endDateTime){
 
         super.updateItinerary(name);
 
@@ -63,8 +63,8 @@ public class Transport extends Itinerary{
             this.startDate = startDate;
         }
 
-        if(endDate != null){
-            this.endDate = endDate;
+        if(endDateTime != null){
+            this.endDateTime = endDateTime;
         }
     }
 }

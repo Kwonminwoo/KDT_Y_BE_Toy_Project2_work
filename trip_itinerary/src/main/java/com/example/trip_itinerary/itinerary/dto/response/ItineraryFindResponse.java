@@ -19,12 +19,11 @@ import java.util.Stack;
 @NoArgsConstructor
 public class ItineraryFindResponse {
     private String name;
-//    private String type; // 타입으로 구분 해야 하나?
     private String transportation;
     private String startLocation;
     private String endLocation;
-    private LocalDateTime startDate;
-    private LocalDateTime endDate;
+    private LocalDateTime startDateTime;
+    private LocalDateTime endDateTime;
     private String accommodationName;
     private LocalDateTime checkIn;
     private LocalDateTime checkOut;
@@ -37,8 +36,8 @@ public class ItineraryFindResponse {
                 .transportation(transport.getTransportation())
                 .startLocation(transport.getStartLocation())
                 .endLocation(transport.getEndLocation())
-                .startDate(transport.getStartDate())
-                .endDate(transport.getEndDate())
+                .startDateTime(transport.getStartDateTime())
+                .startDateTime(transport.getEndDateTime())
                 .build();
     }
     public static ItineraryFindResponse fromEntity(Accommodation accommodation){
@@ -54,8 +53,8 @@ public class ItineraryFindResponse {
         return ItineraryFindResponse.builder()
                 .name(stay.getName())
                 .location(stay.getLocation())
-                .endDate(stay.getEndDate())
-                .startDate(stay.getStartDate())
+                .endDateTime(stay.getEndDateTime())
+                .startDateTime(stay.getStartDateTime())
                 .build();
     }
 }

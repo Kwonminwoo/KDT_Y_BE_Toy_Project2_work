@@ -2,6 +2,7 @@ package com.example.trip_itinerary.util;
 
 import com.example.trip_itinerary.itinerary.exception.InvalidDateTimeFormatException;
 import com.example.trip_itinerary.itinerary.exception.ItineraryErrorCode;
+import com.example.trip_itinerary.trip.exception.InvalidDateException;
 import com.example.trip_itinerary.trip.exception.InvalidDateFormatException;
 import com.example.trip_itinerary.trip.exception.TripErrorCode;
 import java.time.LocalDate;
@@ -25,6 +26,20 @@ public abstract class DateUtil {
             throw new InvalidDateTimeFormatException(ItineraryErrorCode.INVALID_DATE_TIME_FORMAT);
         }
     }
+
+    public static void checkValidDateTimeRange(String startDate, String endDate) {
+        if (toLocalDateTime(endDate).isBefore(toLocalDateTime(startDate))) {
+            throw new InvalidDateException(TripErrorCode.INVALID_DATE_RANGE);
+        }
+    }
+
+    public static void checkValidDateRange(String startDate, String endDate) {
+        if (toLocalDate(endDate).isBefore(toLocalDate(startDate))) {
+            throw new InvalidDateException(TripErrorCode.INVALID_DATE_RANGE);
+        }
+    }
+
+
     private DateUtil(){
     }
 

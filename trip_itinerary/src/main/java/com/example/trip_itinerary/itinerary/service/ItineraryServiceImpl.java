@@ -12,22 +12,15 @@ import com.example.trip_itinerary.itinerary.dto.request.update.AccommodationPatc
 import com.example.trip_itinerary.itinerary.dto.request.update.ItineraryPatchRequest;
 import com.example.trip_itinerary.itinerary.dto.request.update.StayPatchRequest;
 import com.example.trip_itinerary.itinerary.dto.request.update.TransportPatchRequest;
-import com.example.trip_itinerary.itinerary.exception.InvalidDateTimeException;
 import com.example.trip_itinerary.itinerary.exception.ItineraryErrorCode;
 import com.example.trip_itinerary.itinerary.exception.ItineraryNotFoundException;
 import com.example.trip_itinerary.itinerary.repository.ItineraryRepository;
 import com.example.trip_itinerary.trip.domain.Trip;
-import com.example.trip_itinerary.trip.exception.InvalidDateException;
-import com.example.trip_itinerary.trip.exception.TripErrorCode;
 import com.example.trip_itinerary.trip.repository.TripRepository;
 import com.example.trip_itinerary.util.DateUtil;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
-import java.util.Date;
-import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @Service
 @Slf4j
@@ -55,17 +48,17 @@ public class ItineraryServiceImpl implements ItineraryService {
     }
 
     private Transport saveTransport(TransportSaveRequest request, Trip trip){
-        checkValidDateTimeRange(request.getStartDate(), request.getEndDate());
+        DateUtil.checkValidDateTimeRange(request.getStartDateTime(), request.getEndDateTime());
         return itineraryRepository.save(request.toEntity(trip));
     }
 
     private Accommodation saveAccommodation(AccommodationSaveRequest request, Trip trip){
-        checkValidDateTimeRange(request.getCheckIn(), request.getCheckOut());
+        DateUtil.checkValidDateTimeRange(request.getCheckInTime(), request.getCheckOutTime());
         return itineraryRepository.save(request.toEntity(trip));
     }
 
     private Stay saveStay(StaySaveRequest request, Trip trip){
-        checkValidDateTimeRange(request.getEndDate(), request.getStartDate());
+        DateUtil.checkValidDateTimeRange(request.getEndDateTime(), request.getStartDateTime());
         return itineraryRepository.save(request.toEntity(trip));
     }
 
@@ -74,29 +67,23 @@ public class ItineraryServiceImpl implements ItineraryService {
         Itinerary foundItinerary = itineraryRepository.findById(id).orElseThrow(() -> new ItineraryNotFoundException(ItineraryErrorCode.ITINERARY_NOT_FOUND));
 
         if(itineraryPatchRequest instanceof TransportPatchRequest transportPatchRequest ){
-            checkValidDateTimeRange(transportPatchRequest.getStartDate(), transportPatchRequest.getEndDate());
+            DateUtil.checkValidDateTimeRange(transportPatchRequest.getStartDateTime(), transportPatchRequest.getEndDateTime());
             patchTransport((Transport) foundItinerary, transportPatchRequest);
         }else if(itineraryPatchRequest instanceof AccommodationPatchRequest accommodationPatchRequest){
-            checkValidDateTimeRange(accommodationPatchRequest.getCheckIn(), accommodationPatchRequest.getCheckOut());
+            DateUtil.checkValidDateTimeRange(accommodationPatchRequest.getCheckIn(), accommodationPatchRequest.getCheckOut());
             patchAccommodation((Accommodation) foundItinerary, accommodationPatchRequest);
         }else if(itineraryPatchRequest instanceof StayPatchRequest stayPatchRequest){
-            checkValidDateTimeRange(stayPatchRequest.getEndDate(), stayPatchRequest.getStartDate());
+            DateUtil.checkValidDateTimeRange(stayPatchRequest.getEndDateTime(), stayPatchRequest.getStartDateTime());
             patchStay((Stay) foundItinerary, stayPatchRequest);
         }
 
         return id;
     }
 
-    private void checkValidDateTimeRange(String startDate, String endDate) {
-        if (DateUtil.toLocalDateTime(endDate).isBefore(DateUtil.toLocalDateTime(startDate))) {
-            throw new InvalidDateTimeException(ItineraryErrorCode.INVALID_DATE_TIME_RANGE);
-        }
-    }
-
     private void patchTransport(Transport transport, TransportPatchRequest transportPatchRequest) {
         transport.updateTransport(transportPatchRequest.getName(), transportPatchRequest.getTransportation(),
                 transportPatchRequest.getStartLocation(), transportPatchRequest.getEndLocation(),
-                DateUtil.toLocalDateTime(transportPatchRequest.getStartDate()), DateUtil.toLocalDateTime(transportPatchRequest.getEndDate()));
+                DateUtil.toLocalDateTime(transportPatchRequest.getStartDateTime()), DateUtil.toLocalDateTime(transportPatchRequest.getEndDateTime()));
     }
     private void patchAccommodation(Accommodation accommodation, AccommodationPatchRequest accommodationPatchRequest) {
         accommodation.updateAccommodation(accommodationPatchRequest.getName(), accommodationPatchRequest.getAccommodationName(),
@@ -106,7 +93,8 @@ public class ItineraryServiceImpl implements ItineraryService {
 
     private void patchStay(Stay stay, StayPatchRequest stayPatchRequest) {
         stay.updateStay(stayPatchRequest.getName(), stayPatchRequest.getLocation(),
-                DateUtil.toLocalDateTime(stayPatchRequest.getStartDate()), DateUtil.toLocalDateTime(stayPatchRequest.getEndDate()));
+                DateUtil.toLocalDateTime(stayPatchRequest.getStartDateTime()), DateUtil.toLocalDateTime(stayPatchRequest.getEndDateTime()));
+
     }
 
 }

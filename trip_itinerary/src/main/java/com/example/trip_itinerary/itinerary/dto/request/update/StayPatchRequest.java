@@ -15,10 +15,10 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class StayPatchRequest extends ItineraryPatchRequest {
     private String location;
-    private String endDate;
-    private String startDate;
+    private String endDateTime;
+    private String startDateTime;
 
-    public Stay toEntity(Trip trip) {
-        return Stay.of(super.getName(),null, location, DateUtil.toLocalDateTime(startDate), DateUtil.toLocalDateTime(endDate));
-    }
+//    public Stay toEntity(Trip trip) {
+//        return Stay.of(super.getName(),trip, location, DateUtil.toLocalDateTime(startDateTime), DateUtil.toLocalDateTime(endDateTime));
+//    }
 }

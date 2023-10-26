@@ -10,11 +10,9 @@ import java.time.LocalDateTime;
 
 
 @Getter
-@Setter
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
 public class TripPatchRequest {
+
     @NotBlank(message = "여행의 이름을 입력해주세요.")
     @Size(max = 30, message = "여행 이름은 최대 30자입니다.")
     private String name;

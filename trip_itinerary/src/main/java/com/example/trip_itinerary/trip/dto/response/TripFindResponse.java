@@ -10,7 +10,6 @@ import com.example.trip_itinerary.trip.domain.Trip;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 

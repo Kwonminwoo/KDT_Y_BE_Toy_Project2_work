@@ -19,19 +19,19 @@ public class TransportPatchRequest extends ItineraryPatchRequest {
     private String transportation;
     private String startLocation;
     private String endLocation;
-    private String startDate;
-    private String endDate;
+    private String startDateTime;
+    private String endDateTime;
 
-    public TransportPatchRequest(String name, String transportation, String startLocation, String endLocation, String startDate, String endDate) {
-        super(name);
-        this.transportation = transportation;
-        this.startLocation = startLocation;
-        this.endLocation = endLocation;
-        this.startDate = startDate;
-        this.endDate = endDate;
-    }
-    public Transport toEntity(Trip trip) {
-        return Transport.of(super.getName(), trip, transportation, startLocation, endLocation, DateUtil.toLocalDateTime(startDate), DateUtil.toLocalDateTime(endDate));
-    }
+//    public TransportPatchRequest(String name, String transportation, String startLocation, String endLocation, String startDateTime, String endDateTime) {
+//        super(name);
+//        this.transportation = transportation;
+//        this.startLocation = startLocation;
+//        this.endLocation = endLocation;
+//        this.startDateTime = startDateTime;
+//        this.endDateTime = endDateTime;
+//    }
+//    public Transport toEntity(Trip trip) {
+//        return Transport.of(super.getName(), trip, transportation, startLocation, endLocation, DateUtil.toLocalDateTime(startDateTime), DateUtil.toLocalDateTime(endDateTime));
+//    }
 
 }

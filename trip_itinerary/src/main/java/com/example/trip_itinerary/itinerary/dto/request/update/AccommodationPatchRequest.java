@@ -16,7 +16,4 @@ public class AccommodationPatchRequest extends ItineraryPatchRequest {
     private String checkIn;
     private String checkOut;
 
-    public Accommodation toEntity(Trip trip) {
-        return Accommodation.of(super.getName(), trip, accommodationName, DateUtil.toLocalDateTime(checkIn), DateUtil.toLocalDateTime(checkOut));
-    }
 }
