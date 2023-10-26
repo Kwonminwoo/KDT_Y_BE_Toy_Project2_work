@@ -3,6 +3,7 @@ package com.example.trip_itinerary.itinerary.dto.request.update;
 import com.example.trip_itinerary.itinerary.domain.Transport;
 import com.example.trip_itinerary.itinerary.dto.request.ItinerarySaveRequest;
 import com.example.trip_itinerary.trip.domain.Trip;
+import com.example.trip_itinerary.util.DateUtil;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,10 +19,10 @@ public class TransportPatchRequest extends ItineraryPatchRequest {
     private String transportation;
     private String startLocation;
     private String endLocation;
-    private LocalDateTime startDate;
-    private LocalDateTime endDate;
+    private String startDate;
+    private String endDate;
 
-    public TransportPatchRequest(String name, String transportation, String startLocation, String endLocation, LocalDateTime startDate, LocalDateTime endDate) {
+    public TransportPatchRequest(String name, String transportation, String startLocation, String endLocation, String startDate, String endDate) {
         super(name);
         this.transportation = transportation;
         this.startLocation = startLocation;
@@ -30,7 +31,7 @@ public class TransportPatchRequest extends ItineraryPatchRequest {
         this.endDate = endDate;
     }
     public Transport toEntity(Trip trip) {
-        return Transport.of(super.getName(), trip, transportation, startLocation, endLocation, startDate, endDate);
+        return Transport.of(super.getName(), trip, transportation, startLocation, endLocation, DateUtil.toLocalDateTime(startDate), DateUtil.toLocalDateTime(endDate));
     }
 
 }
