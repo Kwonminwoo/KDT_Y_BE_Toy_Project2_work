@@ -8,8 +8,6 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
-import java.time.LocalDateTime;
-
 @Getter
 @Setter
 @NoArgsConstructor
@@ -28,21 +26,21 @@ public class TransportSaveRequest  extends ItinerarySaveRequest{
     private String endLocation;
 
     @NotNull(message = "출발 시간을 입력해주세요.")
-    private String startDate;
+    private String startDateTime;
 
     @NotNull(message = "도착 시간을 입력해주세요.")
-    private String endDate;
+    private String endDateTime;
 
-    public TransportSaveRequest(String name, String transportation, String startLocation, String endLocation, String startDate, String endDate) {
-        super(name);
-        this.transportation = transportation;
-        this.startLocation = startLocation;
-        this.endLocation = endLocation;
-        this.startDate = startDate;
-        this.endDate = endDate;
-    }
+//    public TransportSaveRequest(String name, String transportation, String startLocation, String endLocation, String startDate, String endDate) {
+//        super(name);
+//        this.transportation = transportation;
+//        this.startLocation = startLocation;
+//        this.endLocation = endLocation;
+//        this.startDateTime = startDate;
+//        this.endDateTime = endDate;
+//    }
     public Transport toEntity(Trip trip) {
-        return Transport.of(super.getName(), trip, transportation, startLocation, endLocation, DateUtil.toLocalDateTime(startDate), DateUtil.toLocalDateTime(endDate));
+        return Transport.of(super.getName(), trip, transportation, startLocation, endLocation, DateUtil.toLocalDateTime(startDateTime), DateUtil.toLocalDateTime(endDateTime));
     }
 
 }

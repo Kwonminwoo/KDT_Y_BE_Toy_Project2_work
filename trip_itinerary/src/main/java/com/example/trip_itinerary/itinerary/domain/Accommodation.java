@@ -13,11 +13,11 @@ public class Accommodation extends Itinerary {
     @Column(name = "accommodation_name", nullable = false, length = 20)
     private String accommodationName;
 
-    @Column(name = "check_in",nullable = false, length = 20)
-    private LocalDateTime checkIn;
+    @Column(name = "check_in_time",nullable = false, length = 20)
+    private LocalDateTime checkInTime;
 
-    @Column(name = "check_out", nullable = false, length = 20)
-    private LocalDateTime checkOut;
+    @Column(name = "check_out_time", nullable = false, length = 20)
+    private LocalDateTime checkOutTime;
 
     protected Accommodation() {
     }
@@ -25,8 +25,8 @@ public class Accommodation extends Itinerary {
     private Accommodation(String name, Trip trip, String accommodationName, LocalDateTime checkIn, LocalDateTime checkOut) {
         super(null, name, trip);
         this.accommodationName = accommodationName;
-        this.checkIn = checkIn;
-        this.checkOut = checkOut;
+        this.checkInTime = checkIn;
+        this.checkOutTime = checkOut;
     }
 
     public static Accommodation of(String name, Trip trip, String accommodationName, LocalDateTime checkIn, LocalDateTime checkOut) {
@@ -36,7 +36,7 @@ public class Accommodation extends Itinerary {
     public void updateAccommodation(String name, String accommodationName, LocalDateTime checkIn, LocalDateTime checkOut) {
         super.updateItinerary(name);
         this.accommodationName = accommodationName;
-        this.checkIn = checkIn;
-        this.checkOut = checkOut;
+        this.checkInTime = checkIn;
+        this.checkOutTime = checkOut;
     }
 }

@@ -2,11 +2,6 @@ package com.example.trip_itinerary.itinerary.exception;
 
 import com.example.trip_itinerary.itinerary.controller.ItineraryController;
 import com.example.trip_itinerary.itinerary.dto.response.ItineraryErrorResponse;
-import com.example.trip_itinerary.trip.controller.TripController;
-import com.example.trip_itinerary.trip.dto.response.TripErrorResponse;
-import com.example.trip_itinerary.trip.exception.InvalidDateFormatException;
-import com.example.trip_itinerary.trip.exception.TripErrorCode;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;

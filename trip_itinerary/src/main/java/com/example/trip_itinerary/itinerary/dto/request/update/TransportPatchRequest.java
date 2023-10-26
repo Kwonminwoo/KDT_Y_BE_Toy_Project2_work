@@ -1,15 +1,9 @@
 package com.example.trip_itinerary.itinerary.dto.request.update;
 
-import com.example.trip_itinerary.itinerary.domain.Transport;
-import com.example.trip_itinerary.itinerary.dto.request.ItinerarySaveRequest;
-import com.example.trip_itinerary.trip.domain.Trip;
-import com.example.trip_itinerary.util.DateUtil;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-
-import java.time.LocalDateTime;
 
 @Getter
 @Setter

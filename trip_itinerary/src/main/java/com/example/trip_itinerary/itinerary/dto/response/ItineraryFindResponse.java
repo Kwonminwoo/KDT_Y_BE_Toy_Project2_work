@@ -2,15 +2,11 @@ package com.example.trip_itinerary.itinerary.dto.response;
 
 
 import com.example.trip_itinerary.itinerary.domain.Accommodation;
-import com.example.trip_itinerary.itinerary.domain.Itinerary;
 import com.example.trip_itinerary.itinerary.domain.Stay;
 import com.example.trip_itinerary.itinerary.domain.Transport;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.Stack;
 
 @Getter
 @Setter
@@ -25,8 +21,8 @@ public class ItineraryFindResponse {
     private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
     private String accommodationName;
-    private LocalDateTime checkIn;
-    private LocalDateTime checkOut;
+    private LocalDateTime checkInTime;
+    private LocalDateTime checkOutTime;
     private String location;
 
 
@@ -44,8 +40,8 @@ public class ItineraryFindResponse {
         return ItineraryFindResponse.builder()
                 .name(accommodation.getName())
                 .accommodationName(accommodation.getName())
-                .checkIn(accommodation.getCheckIn())
-                .checkOut(accommodation.getCheckOut())
+                .checkInTime(accommodation.getCheckInTime())
+                .checkOutTime(accommodation.getCheckOutTime())
                 .build();
     }
 

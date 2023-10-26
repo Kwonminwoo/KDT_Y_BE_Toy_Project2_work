@@ -19,11 +19,11 @@ public class Transport extends Itinerary{
     @Column(name = "end_location", nullable = false, length = 30)
     private String endLocation;
 
-    @Column(name = "start_date", nullable = false)
-    private LocalDateTime startDate;
+    @Column(name = "start_date_time", nullable = false)
+    private LocalDateTime startDateTime;
 
-    @Column(name = "end_date", nullable = false)
-    private LocalDateTime endDate;
+    @Column(name = "end_date_time", nullable = false)
+    private LocalDateTime endDateTime;
 
     protected Transport() {}
 
@@ -59,8 +59,8 @@ public class Transport extends Itinerary{
             this.endLocation = endLocation;
         }
 
-        if(startDate != null){
-            this.startDate = startDate;
+        if(startDateTime != null){
+            this.startDateTime = startDateTime;
         }
 
         if(endDateTime != null){

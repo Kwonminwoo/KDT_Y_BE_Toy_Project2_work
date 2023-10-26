@@ -2,20 +2,12 @@ package com.example.trip_itinerary.trip.dto.request;
 
 
 import com.example.trip_itinerary.trip.domain.Trip;
-import com.example.trip_itinerary.trip.exception.InvalidDateFormatException;
 import com.example.trip_itinerary.util.DateUtil;
-import com.fasterxml.jackson.core.JacksonException;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
-import java.io.IOException;
 
 @Getter
 @Setter

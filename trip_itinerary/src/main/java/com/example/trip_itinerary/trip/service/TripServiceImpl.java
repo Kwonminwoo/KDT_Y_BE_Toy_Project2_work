@@ -1,7 +1,6 @@
 package com.example.trip_itinerary.trip.service;
 
 import com.example.trip_itinerary.itinerary.domain.Itinerary;
-import com.example.trip_itinerary.itinerary.domain.Transport;
 import com.example.trip_itinerary.trip.domain.Trip;
 import com.example.trip_itinerary.trip.dto.request.TripPatchRequest;
 import com.example.trip_itinerary.trip.dto.request.TripSaveRequest;
@@ -14,10 +13,8 @@ import com.example.trip_itinerary.util.DateUtil;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service

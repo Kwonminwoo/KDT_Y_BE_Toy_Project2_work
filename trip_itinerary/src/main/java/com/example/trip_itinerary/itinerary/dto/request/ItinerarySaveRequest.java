@@ -1,9 +1,5 @@
 package com.example.trip_itinerary.itinerary.dto.request;
 
-import com.example.trip_itinerary.itinerary.domain.Itinerary;
-import com.example.trip_itinerary.itinerary.dto.request.update.AccommodationPatchRequest;
-import com.example.trip_itinerary.itinerary.dto.request.update.StayPatchRequest;
-import com.example.trip_itinerary.itinerary.dto.request.update.TransportPatchRequest;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.constraints.NotBlank;
@@ -13,7 +9,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
 
 @Getter
 @Setter

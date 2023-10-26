@@ -6,12 +6,9 @@ import com.example.trip_itinerary.util.DateUtil;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -22,12 +19,12 @@ public class StaySaveRequest extends ItinerarySaveRequest{
     private String location;
 
     @NotNull(message = "체류 장소 도착 시간을 입력해주세요.")
-    private String endDate;
+    private String endDateTime;
 
     @NotNull(message = "체류 장소에서 떠날 시간을 입력해주세요.")
-    private String startDate;
+    private String startDateTime;
 
     public Stay toEntity(Trip trip) {
-        return Stay.of(super.getName(),trip, location, DateUtil.toLocalDateTime(startDate), DateUtil.toLocalDateTime(endDate));
+        return Stay.of(super.getName(),trip, location, DateUtil.toLocalDateTime(startDateTime), DateUtil.toLocalDateTime(endDateTime));
     }
 }
