@@ -12,13 +12,20 @@ import com.example.trip_itinerary.itinerary.dto.request.update.AccommodationPatc
 import com.example.trip_itinerary.itinerary.dto.request.update.ItineraryPatchRequest;
 import com.example.trip_itinerary.itinerary.dto.request.update.StayPatchRequest;
 import com.example.trip_itinerary.itinerary.dto.request.update.TransportPatchRequest;
+import com.example.trip_itinerary.itinerary.exception.InvalidDateTimeException;
+import com.example.trip_itinerary.itinerary.exception.ItineraryErrorCode;
+import com.example.trip_itinerary.itinerary.exception.ItineraryNotFoundException;
 import com.example.trip_itinerary.itinerary.repository.ItineraryRepository;
 import com.example.trip_itinerary.trip.domain.Trip;
+import com.example.trip_itinerary.trip.exception.InvalidDateException;
+import com.example.trip_itinerary.trip.exception.TripErrorCode;
 import com.example.trip_itinerary.trip.repository.TripRepository;
+import com.example.trip_itinerary.util.DateUtil;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -37,48 +44,69 @@ public class ItineraryServiceImpl implements ItineraryService {
 
     @Override
     public Long saveItinerary(Long id, ItinerarySaveRequest itinerarySaveRequest) {
-        Trip foundTrip = tripRepository.findById(id).orElseThrow(NoSuchElementException::new);
-
-        if(itinerarySaveRequest instanceof TransportSaveRequest){
-            Transport savedTransport = itineraryRepository.save(((TransportSaveRequest)itinerarySaveRequest).toEntity(foundTrip));
-            return savedTransport.getId();
-        } else if (itinerarySaveRequest instanceof AccommodationSaveRequest){
-            Accommodation savedAccommodation = itineraryRepository.save(((AccommodationSaveRequest)itinerarySaveRequest).toEntity(foundTrip));
-            return savedAccommodation.getId();
-        } else{
-            Stay savedStay = itineraryRepository.save(((StaySaveRequest) itinerarySaveRequest).toEntity(foundTrip));
-            return savedStay.getId();
+        Trip foundTrip = tripRepository.findById(id).orElseThrow(() -> new ItineraryNotFoundException(ItineraryErrorCode.ITINERARY_NOT_FOUND));
+        if(itinerarySaveRequest instanceof TransportSaveRequest transportSaveRequest){
+            return saveTransport(transportSaveRequest, foundTrip).getId();
+        } else if (itinerarySaveRequest instanceof AccommodationSaveRequest accommodationSaveRequest){
+            return saveAccommodation(accommodationSaveRequest, foundTrip).getId();
+        } else {
+            return saveStay((StaySaveRequest) itinerarySaveRequest, foundTrip).getId();
         }
+    }
+
+    private Transport saveTransport(TransportSaveRequest request, Trip trip){
+        checkValidDateTimeRange(request.getStartDate(), request.getEndDate());
+        return itineraryRepository.save(request.toEntity(trip));
+    }
+
+    private Accommodation saveAccommodation(AccommodationSaveRequest request, Trip trip){
+        checkValidDateTimeRange(request.getCheckIn(), request.getCheckOut());
+        return itineraryRepository.save(request.toEntity(trip));
+    }
+
+    private Stay saveStay(StaySaveRequest request, Trip trip){
+        checkValidDateTimeRange(request.getEndDate(), request.getStartDate());
+        return itineraryRepository.save(request.toEntity(trip));
     }
 
     @Override
     public Long patchItinerary(Long id, ItineraryPatchRequest itineraryPatchRequest) {
-        Itinerary foundItinerary = itineraryRepository.findById(id).orElseThrow(NoSuchElementException::new);
-        if(itineraryPatchRequest instanceof TransportPatchRequest){
-            patchTransport((Transport) foundItinerary, (TransportPatchRequest)itineraryPatchRequest);
-        }else if(itineraryPatchRequest instanceof AccommodationPatchRequest){
-            patchAccommodation((Accommodation) foundItinerary, (AccommodationPatchRequest)itineraryPatchRequest);
-        }else if(itineraryPatchRequest instanceof StayPatchRequest){
-            patchStay((Stay) foundItinerary, (StayPatchRequest)itineraryPatchRequest);
+        Itinerary foundItinerary = itineraryRepository.findById(id).orElseThrow(() -> new ItineraryNotFoundException(ItineraryErrorCode.ITINERARY_NOT_FOUND));
+
+        if(itineraryPatchRequest instanceof TransportPatchRequest transportPatchRequest ){
+            checkValidDateTimeRange(transportPatchRequest.getStartDate(), transportPatchRequest.getEndDate());
+            patchTransport((Transport) foundItinerary, transportPatchRequest);
+        }else if(itineraryPatchRequest instanceof AccommodationPatchRequest accommodationPatchRequest){
+            checkValidDateTimeRange(accommodationPatchRequest.getCheckIn(), accommodationPatchRequest.getCheckOut());
+            patchAccommodation((Accommodation) foundItinerary, accommodationPatchRequest);
+        }else if(itineraryPatchRequest instanceof StayPatchRequest stayPatchRequest){
+            checkValidDateTimeRange(stayPatchRequest.getEndDate(), stayPatchRequest.getStartDate());
+            patchStay((Stay) foundItinerary, stayPatchRequest);
         }
 
         return id;
     }
 
+    private void checkValidDateTimeRange(String startDate, String endDate) {
+        if (DateUtil.toLocalDateTime(endDate).isBefore(DateUtil.toLocalDateTime(startDate))) {
+            throw new InvalidDateTimeException(ItineraryErrorCode.INVALID_DATE_TIME_RANGE);
+        }
+    }
+
     private void patchTransport(Transport transport, TransportPatchRequest transportPatchRequest) {
         transport.updateTransport(transportPatchRequest.getName(), transportPatchRequest.getTransportation(),
                 transportPatchRequest.getStartLocation(), transportPatchRequest.getEndLocation(),
-                transportPatchRequest.getStartDate(), transportPatchRequest.getEndDate());
+                DateUtil.toLocalDateTime(transportPatchRequest.getStartDate()), DateUtil.toLocalDateTime(transportPatchRequest.getEndDate()));
     }
     private void patchAccommodation(Accommodation accommodation, AccommodationPatchRequest accommodationPatchRequest) {
         accommodation.updateAccommodation(accommodationPatchRequest.getName(), accommodationPatchRequest.getAccommodationName(),
-                accommodationPatchRequest.getCheckIn(), accommodationPatchRequest.getCheckOut());
+                DateUtil.toLocalDateTime(accommodationPatchRequest.getCheckIn()), DateUtil.toLocalDateTime(accommodationPatchRequest.getCheckOut()));
     }
 
 
     private void patchStay(Stay stay, StayPatchRequest stayPatchRequest) {
         stay.updateStay(stayPatchRequest.getName(), stayPatchRequest.getLocation(),
-                stayPatchRequest.getStartDate(), stayPatchRequest.getEndDate());
+                DateUtil.toLocalDateTime(stayPatchRequest.getStartDate()), DateUtil.toLocalDateTime(stayPatchRequest.getEndDate()));
     }
 
 }
