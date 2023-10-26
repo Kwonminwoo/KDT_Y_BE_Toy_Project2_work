@@ -9,7 +9,7 @@ import com.example.trip_itinerary.trip.dto.response.TripListFindResponse;
 import java.util.List;
 
 public interface TripService {
-    Trip saveTrip(TripSaveRequest tripSaveRequest);
+    Long saveTrip(TripSaveRequest tripSaveRequest);
     List<TripListFindResponse> findAllTrips();
     TripFindResponse getTripById(Long id);
     Long patchTrip(Long id, TripPatchRequest tripPatchRequest);
