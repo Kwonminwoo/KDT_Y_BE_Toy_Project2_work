@@ -6,6 +6,7 @@ import lombok.Getter;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -27,21 +28,22 @@ public class Trip {
     private boolean isDomestic;
 
     @OneToMany(mappedBy = "trip")
-    private List<Itinerary> itineraryList;
+    private List<Itinerary> itineraryList = new ArrayList<>();
 
     protected Trip(){
     }
 
-    private Trip(Long id, String name, LocalDate startDate, LocalDate endDate, boolean isDomestic) {
+    private Trip(Long id, String name, LocalDate startDate, LocalDate endDate, boolean isDomestic, List<Itinerary> itineraryList) {
         this.id = id;
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
         this.isDomestic = isDomestic;
+        this.itineraryList = itineraryList;
     }
 
-    public static Trip of(Long id, String name, LocalDate startDate, LocalDate endDate, boolean isDomestic) {
-        return new Trip(id, name, startDate, endDate, isDomestic);
+    public static Trip of(Long id, String name, LocalDate startDate, LocalDate endDate, boolean isDomestic, List<Itinerary> itineraryList) {
+        return new Trip(id, name, startDate, endDate, isDomestic, itineraryList);
     }
 
     public void updateTrip(String name, LocalDate startDate, LocalDate endDate, Boolean isDomestic){

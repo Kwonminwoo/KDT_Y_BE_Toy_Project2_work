@@ -20,10 +20,10 @@ public class TripPatchRequest {
     private String name;
 
     @NotNull(message = "여행의 시작 날짜를 입력해주세요.")
-    private LocalDate startDate;
+    private String startDate;
 
     @NotNull(message = "여행의 종료 날짜를 입력해주세요.")
-    private LocalDate endDate;
+    private String endDate;
 
     @NotNull(message = "여행의 국내/국외 타입을 입력해주세요.")
     private Boolean isDomestic;

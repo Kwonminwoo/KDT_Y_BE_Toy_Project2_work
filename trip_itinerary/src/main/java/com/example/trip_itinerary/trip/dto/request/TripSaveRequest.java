@@ -2,20 +2,24 @@ package com.example.trip_itinerary.trip.dto.request;
 
 
 import com.example.trip_itinerary.trip.domain.Trip;
+import com.example.trip_itinerary.trip.exception.InvalidDateFormatException;
+import com.example.trip_itinerary.util.DateUtil;
+import com.fasterxml.jackson.core.JacksonException;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.io.IOException;
 
 @Getter
 @Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class TripSaveRequest {
@@ -24,16 +28,16 @@ public class TripSaveRequest {
     private String name;
 
     @NotNull(message = "여행의 시작 날짜를 입력해주세요.")
-    private LocalDate startDate;
+    private String startDate;
 
     @NotNull(message = "여행의 종료 날짜를 입력해주세요.")
-    private LocalDate endDate;
+    private String endDate;
 
     @NotNull(message = "여행의 국내/국외 타입을 입력해주세요.")
     private Boolean isDomestic;
-    // ToDo: 타입체크는 따로 로직으로
 
-    public Trip toEntity(){
-        return Trip.of(null, name, startDate, endDate, isDomestic);
+    public Trip toEntity() {
+        return Trip.of(null, name, DateUtil.toLocalDate(startDate), DateUtil.toLocalDate(endDate), isDomestic, null);
     }
+
 }
