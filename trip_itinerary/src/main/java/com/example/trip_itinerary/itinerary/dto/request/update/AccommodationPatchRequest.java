@@ -1,13 +1,11 @@
 package com.example.trip_itinerary.itinerary.dto.request.update;
 
 import com.example.trip_itinerary.itinerary.domain.Accommodation;
-import com.example.trip_itinerary.itinerary.dto.request.ItinerarySaveRequest;
 import com.example.trip_itinerary.trip.domain.Trip;
+import com.example.trip_itinerary.util.DateUtil;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -15,10 +13,10 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class AccommodationPatchRequest extends ItineraryPatchRequest {
     private String accommodationName;
-    private LocalDateTime checkIn;
-    private LocalDateTime checkOut;
+    private String checkIn;
+    private String checkOut;
 
     public Accommodation toEntity(Trip trip) {
-        return Accommodation.of(super.getName(), trip, accommodationName, checkIn, checkOut);
+        return Accommodation.of(super.getName(), trip, accommodationName, DateUtil.toLocalDateTime(checkIn), DateUtil.toLocalDateTime(checkOut));
     }
 }

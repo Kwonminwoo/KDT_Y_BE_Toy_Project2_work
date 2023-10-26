@@ -1,9 +1,15 @@
 package com.example.trip_itinerary.itinerary.exception;
 
+import com.example.trip_itinerary.itinerary.controller.ItineraryController;
+import com.example.trip_itinerary.itinerary.dto.response.ItineraryErrorResponse;
 import com.example.trip_itinerary.trip.controller.TripController;
+import com.example.trip_itinerary.trip.dto.response.TripErrorResponse;
+import com.example.trip_itinerary.trip.exception.InvalidDateFormatException;
+import com.example.trip_itinerary.trip.exception.TripErrorCode;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -11,12 +17,21 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.List;
 
-@RestControllerAdvice(basePackageClasses = TripController.class)
+@RestControllerAdvice(basePackageClasses = ItineraryController.class)
 public class ItineraryExceptionHandler {
-    @ExceptionHandler(EmptyResultDataAccessException.class)
-    public ResponseEntity<String> handle(EmptyResultDataAccessException e) {
-        return ResponseEntity.status((HttpStatus.UNAUTHORIZED))
-                .body("해당 아이디를 가진 유저가 없습니다. 아이디 값을 확인해주세요");
+    @ExceptionHandler(ItineraryNotFoundException.class)
+    public ItineraryErrorResponse handle(ItineraryNotFoundException e) {
+        return ItineraryErrorResponse.from(e.getErrorCode());
+    }
+
+    @ExceptionHandler(InvalidDateTimeException.class)
+    public ItineraryErrorResponse handle(InvalidDateTimeException e){
+        return ItineraryErrorResponse.from(e.getErrorCode());
+    }
+
+    @ExceptionHandler(InvalidDateTimeFormatException.class)
+    public ItineraryErrorResponse handle(InvalidDateTimeFormatException e){
+        return ItineraryErrorResponse.from(e.getErrorCode());
     }
 
 
@@ -32,6 +47,10 @@ public class ItineraryExceptionHandler {
         String errorMessage = errorMessageBuilder.toString().trim(); // Remove trailing newline
 
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorMessage);
+    }
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ItineraryErrorResponse handleHttpMessageNotReadableException(HttpMessageNotReadableException e) {
+        return ItineraryErrorResponse.from(ItineraryErrorCode.NOT_MATCH_DATA_TYPE);
     }
 
 }

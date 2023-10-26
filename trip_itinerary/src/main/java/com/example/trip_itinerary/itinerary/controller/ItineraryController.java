@@ -6,6 +6,10 @@ import com.example.trip_itinerary.itinerary.dto.request.update.ItineraryPatchReq
 import com.example.trip_itinerary.itinerary.dto.request.update.StayPatchRequest;
 import com.example.trip_itinerary.itinerary.dto.request.update.TransportPatchRequest;
 import com.example.trip_itinerary.itinerary.service.ItineraryService;
+import com.example.trip_itinerary.trip.exception.InvalidDateException;
+import com.example.trip_itinerary.trip.exception.TripErrorCode;
+import com.example.trip_itinerary.util.DateUtil;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -19,12 +23,12 @@ public class ItineraryController {
     }
 
     @PostMapping("/{id}/itinerary")
-    public Long saveItinerary(@RequestBody ItinerarySaveRequest staySaveRequest, @PathVariable Long id){
+    public Long saveItinerary(@PathVariable Long id, @RequestBody @Validated ItinerarySaveRequest staySaveRequest){
         return itineraryService.saveItinerary(id, staySaveRequest);
     }
 
     @PatchMapping("/itineraries/{id}")
-    public Long patchItinerary(@PathVariable Long id, @RequestBody ItineraryPatchRequest itineraryPatchRequest){
+    public Long patchItinerary(@PathVariable Long id, @RequestBody @Validated ItineraryPatchRequest itineraryPatchRequest){
         return itineraryService.patchItinerary(id, itineraryPatchRequest);
     }
 }

@@ -2,6 +2,7 @@ package com.example.trip_itinerary.itinerary.dto.request;
 
 import com.example.trip_itinerary.itinerary.domain.Transport;
 import com.example.trip_itinerary.trip.domain.Trip;
+import com.example.trip_itinerary.util.DateUtil;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -27,12 +28,12 @@ public class TransportSaveRequest  extends ItinerarySaveRequest{
     private String endLocation;
 
     @NotNull(message = "출발 시간을 입력해주세요.")
-    private LocalDateTime startDate;
+    private String startDate;
 
     @NotNull(message = "도착 시간을 입력해주세요.")
-    private LocalDateTime endDate;
+    private String endDate;
 
-    public TransportSaveRequest(String name, String transportation, String startLocation, String endLocation, LocalDateTime startDate, LocalDateTime endDate) {
+    public TransportSaveRequest(String name, String transportation, String startLocation, String endLocation, String startDate, String endDate) {
         super(name);
         this.transportation = transportation;
         this.startLocation = startLocation;
@@ -41,7 +42,7 @@ public class TransportSaveRequest  extends ItinerarySaveRequest{
         this.endDate = endDate;
     }
     public Transport toEntity(Trip trip) {
-        return Transport.of(super.getName(), trip, transportation, startLocation, endLocation, startDate, endDate);
+        return Transport.of(super.getName(), trip, transportation, startLocation, endLocation, DateUtil.toLocalDateTime(startDate), DateUtil.toLocalDateTime(endDate));
     }
 
 }
