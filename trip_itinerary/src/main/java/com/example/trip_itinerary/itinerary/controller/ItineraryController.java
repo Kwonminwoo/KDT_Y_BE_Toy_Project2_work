@@ -12,17 +12,17 @@ public class ItineraryController {
 
     private final ItineraryService itineraryService;
 
-    public ItineraryController(ItineraryService itineraryService){
+    public ItineraryController(ItineraryService itineraryService) {
         this.itineraryService = itineraryService;
     }
 
     @PostMapping("/{id}/itinerary")
-    public Long saveItinerary(@PathVariable Long id, @RequestBody @Validated ItinerarySaveRequest staySaveRequest){
+    public Long saveItinerary(@PathVariable Long id, @RequestBody @Validated ItinerarySaveRequest staySaveRequest) {
         return itineraryService.saveItinerary(id, staySaveRequest);
     }
 
     @PatchMapping("/itineraries/{id}")
-    public Long patchItinerary(@PathVariable Long id, @RequestBody @Validated ItineraryPatchRequest itineraryPatchRequest){
+    public Long patchItinerary(@PathVariable Long id, @RequestBody @Validated ItineraryPatchRequest itineraryPatchRequest) {
         return itineraryService.patchItinerary(id, itineraryPatchRequest);
     }
 

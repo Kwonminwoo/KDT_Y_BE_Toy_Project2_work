@@ -30,8 +30,8 @@ public class ItineraryServiceImpl implements ItineraryService {
     private final ItineraryRepository itineraryRepository;
     private final TripRepository tripRepository;
 
-    private final String TRANSPORT ="transport";
-    private final String ACCOMMODATION ="accommodation";
+    private final String TRANSPORT = "transport";
+    private final String ACCOMMODATION = "accommodation";
     private final String STAY = "stay";
 
 
@@ -58,7 +58,7 @@ public class ItineraryServiceImpl implements ItineraryService {
 
     private Transport saveTransport(TransportSaveRequest request, Trip trip) {
         this.
-        checkSaveTimeRange(request, trip, TRANSPORT);
+                checkSaveTimeRange(request, trip, TRANSPORT);
         Transport transport = Transport.of(request.getName(), trip, request.getTransportation(), request.getDepartureLocation(),
                 request.getArrivalLocation(), DateUtil.toLocalDateTime(request.getDepartureDateTime()),
                 DateUtil.toLocalDateTime(request.getArrivalDateTime()));
@@ -94,22 +94,6 @@ public class ItineraryServiceImpl implements ItineraryService {
         Stay stay = Stay.of(request.getName(), trip, request.getLocation(), DateUtil.toLocalDateTime(request.getArrivalDateTime()),
                 DateUtil.toLocalDateTime(request.getLeaveDateTime()));
         return itineraryRepository.save(stay);
-    }
-
-    private void checkPatchTimeRange(ItineraryPatchRequest request, Trip trip, String type) {
-        if (type.equals(TRANSPORT)) {
-            DateUtil.checkRangeStart(trip.getStartDate().toString(), ((TransportPatchRequest) request).getDepartureDateTime());
-            DateUtil.checkRangeEnd(trip.getEndDate().toString(), ((TransportPatchRequest) request).getArrivalDateTime());
-            DateUtil.checkValidDateTimeRange(((TransportPatchRequest) request).getDepartureDateTime(), ((TransportPatchRequest) request).getArrivalDateTime());
-        } else if (type.equals(ACCOMMODATION)) {
-            DateUtil.checkRangeStart(trip.getStartDate().toString(), ((AccommodationPatchRequest) request).getCheckInTime());
-            DateUtil.checkRangeEnd(trip.getEndDate().toString(), ((AccommodationPatchRequest) request).getCheckOutTime());
-            DateUtil.checkValidDateTimeRange(((AccommodationPatchRequest) request).getCheckInTime(), ((AccommodationPatchRequest) request).getCheckOutTime());
-        } else if (type.equals(STAY)) {
-            DateUtil.checkRangeStart(trip.getStartDate().toString(), ((StayPatchRequest) request).getArrivalDateTime());
-            DateUtil.checkRangeEnd(trip.getEndDate().toString(), ((StayPatchRequest) request).getLeaveDateTime());
-            DateUtil.checkValidDateTimeRange(((StayPatchRequest) request).getArrivalDateTime(), ((StayPatchRequest) request).getLeaveDateTime());
-        }
     }
 
     @Override
@@ -165,6 +149,22 @@ public class ItineraryServiceImpl implements ItineraryService {
 
         stay.updateStay(request.getName(), request.getLocation(),
                 DateUtil.toLocalDateTime(request.getArrivalDateTime()), DateUtil.toLocalDateTime(request.getLeaveDateTime()));
+    }
+
+    private void checkPatchTimeRange(ItineraryPatchRequest request, Trip trip, String type) {
+        if (type.equals(TRANSPORT)) {
+            DateUtil.checkRangeStart(trip.getStartDate().toString(), ((TransportPatchRequest) request).getDepartureDateTime());
+            DateUtil.checkRangeEnd(trip.getEndDate().toString(), ((TransportPatchRequest) request).getArrivalDateTime());
+            DateUtil.checkValidDateTimeRange(((TransportPatchRequest) request).getDepartureDateTime(), ((TransportPatchRequest) request).getArrivalDateTime());
+        } else if (type.equals(ACCOMMODATION)) {
+            DateUtil.checkRangeStart(trip.getStartDate().toString(), ((AccommodationPatchRequest) request).getCheckInTime());
+            DateUtil.checkRangeEnd(trip.getEndDate().toString(), ((AccommodationPatchRequest) request).getCheckOutTime());
+            DateUtil.checkValidDateTimeRange(((AccommodationPatchRequest) request).getCheckInTime(), ((AccommodationPatchRequest) request).getCheckOutTime());
+        } else if (type.equals(STAY)) {
+            DateUtil.checkRangeStart(trip.getStartDate().toString(), ((StayPatchRequest) request).getArrivalDateTime());
+            DateUtil.checkRangeEnd(trip.getEndDate().toString(), ((StayPatchRequest) request).getLeaveDateTime());
+            DateUtil.checkValidDateTimeRange(((StayPatchRequest) request).getArrivalDateTime(), ((StayPatchRequest) request).getLeaveDateTime());
+        }
     }
 
 }

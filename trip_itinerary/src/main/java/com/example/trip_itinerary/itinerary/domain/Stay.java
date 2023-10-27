@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @DiscriminatorValue("stay")
-public class Stay extends Itinerary{
+public class Stay extends Itinerary {
 
     @Column(nullable = false, length = 30)
     private String location;
@@ -20,7 +20,8 @@ public class Stay extends Itinerary{
     @Column(nullable = false, name = "leave_date_time")
     private LocalDateTime leaveDateTime;
 
-    protected Stay() {}
+    protected Stay() {
+    }
 
     private Stay(String name, Trip trip, String location, LocalDateTime arrivalDateTime, LocalDateTime leaveDateTime) {
         super(null, name, trip);
@@ -33,7 +34,7 @@ public class Stay extends Itinerary{
         return new Stay(name, trip, location, arrivalDateTime, leaveDateTime);
     }
 
-    public void updateStay(String name, String location, LocalDateTime arrivalDateTime, LocalDateTime leaveDateTime){
+    public void updateStay(String name, String location, LocalDateTime arrivalDateTime, LocalDateTime leaveDateTime) {
         super.updateItinerary(name);
         if (location != null) {
             this.location = location;

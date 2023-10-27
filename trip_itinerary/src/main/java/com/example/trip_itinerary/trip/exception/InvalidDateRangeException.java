@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class InvalidDateRangeException extends RuntimeException{
+public class InvalidDateRangeException extends RuntimeException {
 
     private TripErrorCode errorCode;
 

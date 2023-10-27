@@ -14,7 +14,7 @@ public class Accommodation extends Itinerary {
     @Column(name = "accommodation_name", nullable = false, length = 30)
     private String accommodationName;
 
-    @Column(name = "check_in_time",nullable = false)
+    @Column(name = "check_in_time", nullable = false)
     private LocalDateTime checkInTime;
 
     @Column(name = "check_out_time", nullable = false)
@@ -36,10 +36,10 @@ public class Accommodation extends Itinerary {
 
     public void updateAccommodation(String name, String accommodationName, LocalDateTime checkInTime, LocalDateTime checkOutTime) {
         super.updateItinerary(name);
-        if(accommodationName != null){
+        if (accommodationName != null) {
             this.accommodationName = accommodationName;
         }
-        if(checkInTime != null){
+        if (checkInTime != null) {
             this.checkInTime = checkInTime;
         }
         if (checkOutTime != null) {

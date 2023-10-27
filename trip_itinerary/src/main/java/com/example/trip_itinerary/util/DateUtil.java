@@ -3,8 +3,8 @@ package com.example.trip_itinerary.util;
 import com.example.trip_itinerary.itinerary.exception.InvalidDateTimeFormatException;
 import com.example.trip_itinerary.itinerary.exception.InvalidDateTimeRangeException;
 import com.example.trip_itinerary.itinerary.exception.ItineraryErrorCode;
-import com.example.trip_itinerary.trip.exception.InvalidDateRangeException;
 import com.example.trip_itinerary.trip.exception.InvalidDateFormatException;
+import com.example.trip_itinerary.trip.exception.InvalidDateRangeException;
 import com.example.trip_itinerary.trip.exception.TripErrorCode;
 
 import java.time.LocalDate;
@@ -13,21 +13,21 @@ import java.time.format.DateTimeParseException;
 
 public abstract class DateUtil {
 
-    private DateUtil(){
+    private DateUtil() {
     }
 
-    public static LocalDate toLocalDate(String date) throws InvalidDateFormatException{
+    public static LocalDate toLocalDate(String date) throws InvalidDateFormatException {
         try {
             return LocalDate.parse(date);
-        } catch (DateTimeParseException e){
+        } catch (DateTimeParseException e) {
             throw new InvalidDateFormatException(TripErrorCode.INVALID_DATE_FORMAT);
         }
     }
 
-    public static LocalDateTime toLocalDateTime(String dateTime) throws InvalidDateTimeFormatException{
+    public static LocalDateTime toLocalDateTime(String dateTime) throws InvalidDateTimeFormatException {
         try {
             return LocalDateTime.parse(dateTime);
-        } catch (DateTimeParseException e){
+        } catch (DateTimeParseException e) {
             throw new InvalidDateTimeFormatException(ItineraryErrorCode.INVALID_DATE_TIME_FORMAT);
         }
     }
@@ -48,11 +48,11 @@ public abstract class DateUtil {
         }
     }
 
-    public static void checkRangeStart(String tripStartDateStr, String itineraryStartDateStr) throws InvalidDateRangeException{
+    public static void checkRangeStart(String tripStartDateStr, String itineraryStartDateStr) throws InvalidDateRangeException {
         LocalDate tripStartDate = toLocalDate(tripStartDateStr);
         LocalDate itineraryStartDate = toLocalDateTime(itineraryStartDateStr).toLocalDate();
 
-        if(tripStartDate.isAfter(itineraryStartDate)){
+        if (tripStartDate.isAfter(itineraryStartDate)) {
             throw new InvalidDateTimeRangeException(ItineraryErrorCode.INVALID_DATE_TIME_RANGE);
         }
     }
@@ -62,15 +62,9 @@ public abstract class DateUtil {
         LocalDate tripEndDate = toLocalDate(tripEndDateStr);
         LocalDate itineraryEndDate = toLocalDateTime(itineraryEndDateStr).toLocalDate();
 
-        if(tripEndDate.isBefore(itineraryEndDate)){
+        if (tripEndDate.isBefore(itineraryEndDate)) {
             throw new InvalidDateTimeRangeException(ItineraryErrorCode.INVALID_DATE_TIME_RANGE);
         }
     }
-
-    public static void check(){
-
-    }
-
-
 
 }

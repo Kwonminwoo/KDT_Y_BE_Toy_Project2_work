@@ -1,5 +1,6 @@
 package com.example.trip_itinerary.trip.dto.request;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import jakarta.validation.constraints.NotBlank;
@@ -28,6 +29,7 @@ public class TripPatchRequest {
     private String endDate;
 
     @NotNull(message = "여행의 국내/국외 타입을 입력해주세요.")
+    @JsonProperty("is_domestic")
     private Boolean isDomestic;
 
 }
