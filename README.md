@@ -10,9 +10,6 @@
   
 <br/>
 
-## 📝 [API 명세서 링크](https://kwonminwoos-organization.gitbook.io/trip-itinerary-project-api/)
-
-<br/>
 
 ## 📌 주요 기능
 
@@ -56,7 +53,7 @@
        
 <br/>
 
-### 2. 여행과 여정 날짜의 논리성<br/>
+### 2. 여행과 여정 날짜의 논리성
 
 - 여행의 종료 날짜가 시작 날짜보다 앞에 있는 경우<br/>
 - 여정의 과정 종료 일시가 시작 일시보다 앞에 있는 경우<br/>
@@ -66,6 +63,16 @@
 ## 2️⃣여행 조회 및 수정 시 없는 데이터일 경우
 
 - 여행 id를 조회하였으나 해당 여행이 없는 경우
+<br/>
+
+## 📝 [API 명세서 링크](https://kwonminwoos-organization.gitbook.io/trip-itinerary-project-api/)
+
+<br/>
+
+## 🗂 ERD
+
+![image](https://github.com/Kwonminwoo/KDT_Y_BE_Toy_Project2_work/assets/132974447/27fa7cbf-51ae-4c3a-9037-597c980233ed)
+
 <br/>
 
 ## 🕰️ 개발 기간
