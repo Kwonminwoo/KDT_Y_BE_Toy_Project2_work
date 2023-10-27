@@ -10,6 +10,10 @@
   
 <br/>
 
+## [API 명세서 링크](https://kwonminwoos-organization.gitbook.io/trip-itinerary-project-api/)
+
+<br/>
+
 ## 📌 주요 기능
 
 
