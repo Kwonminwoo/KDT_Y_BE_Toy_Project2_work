@@ -37,7 +37,7 @@ public class TripController {
     }
 
     @PatchMapping("/{id}")
-    public Long updateTripById(@PathVariable Long id, @RequestBody TripPatchRequest tripPatchRequest) {
+    public Long updateTripById(@PathVariable Long id, @RequestBody @Validated TripPatchRequest tripPatchRequest) {
         return tripService.updateTrip(id, tripPatchRequest);
     }
 
