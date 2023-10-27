@@ -81,24 +81,24 @@ class TripControllerTest {
                 .andExpect(jsonPath("$.id", findId).exists());
     }
 
-//    @Test
-//    void saveTrip() throws Exception{
-//        Long id = 1L;
-//        given(tripService.saveTrip(any()))
-//                .willReturn(id);
-//
-//        mvc.perform(
-//                        post("/trips")
-//                )
-//                .andExpect(status().isOk())
-//                .andDo(print())
-//                .andExpect(jsonPath("$.id", id).exists());
-//    }
+    @Test
+    void saveTrip() throws Exception{
+        Long id = 1L;
+        given(tripService.saveTrip(any()))
+                .willReturn(id);
+
+        mvc.perform(
+                        post("/trips")
+                )
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andExpect(jsonPath("$.id", id).exists());
+    }
 
     @Test
     void patchTripById() throws Exception{
         Long findId = 1L;
-        given(tripService.patchTrip(any(), any()))
+        given(tripService.updateTrip(any(), any()))
                 .willReturn(findId);
 
         ObjectMapper objectMapper = new ObjectMapper();
@@ -106,8 +106,8 @@ class TripControllerTest {
         String patchRequestJson = objectMapper.writeValueAsString(
                 TripPatchRequest.builder()
                 .name("ansdas")
-                .startDate(LocalDate.now())
-                .endDate(LocalDate.now())
+                .startDate(LocalDate.now().toString())
+                .endDate(LocalDate.now().toString())
                 .isDomestic(false)
                 .build()
         );

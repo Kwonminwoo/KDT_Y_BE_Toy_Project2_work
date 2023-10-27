@@ -1,40 +1,41 @@
 package com.example.trip_itinerary.itinerary.domain;
 
 import com.example.trip_itinerary.trip.domain.Trip;
-import jakarta.persistence.*;
-import lombok.Getter;
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
 
 import java.time.LocalDateTime;
 
 @Entity
-@Getter
 @DiscriminatorValue("transport")
 public class Transport extends Itinerary{
+
     @Column(nullable = false, length = 30)
     private String transportation;
 
-    @Column(name = "start_location", nullable = false, length = 30)
-    private String startLocation;
+    @Column(name = "departure_location", nullable = false, length = 30)
+    private String departureLocation;
 
-    @Column(name = "end_location", nullable = false, length = 30)
-    private String endLocation;
+    @Column(name = "arrival_location", nullable = false, length = 30)
+    private String arrivalLocation;
 
-    @Column(name = "start_date_time", nullable = false)
-    private LocalDateTime startDateTime;
+    @Column(name = "departure_date_time", nullable = false)
+    private LocalDateTime departureDateTime;
 
-    @Column(name = "end_date_time", nullable = false)
-    private LocalDateTime endDateTime;
+    @Column(name = "arrival_date_time", nullable = false)
+    private LocalDateTime arrivalDateTime;
 
     protected Transport() {}
 
-    private Transport(String name, Trip trip, String transportation, String startLocation, String endLocation,
-                      LocalDateTime startDate, LocalDateTime endDateTime) {
+    private Transport(String name, Trip trip, String transportation, String departureLocation, String arrivalLocation,
+                      LocalDateTime departureDate, LocalDateTime arrivalDateTime) {
         super(null, name, trip);
         this.transportation = transportation;
-        this.startLocation = startLocation;
-        this.endLocation = endLocation;
-        this.startDateTime = startDate;
-        this.endDateTime = endDateTime;
+        this.departureLocation = departureLocation;
+        this.arrivalLocation = arrivalLocation;
+        this.departureDateTime = departureDate;
+        this.arrivalDateTime = arrivalDateTime;
     }
 
     public static Transport of(String name, Trip trip, String transportation, String startLocation, String endLocation,
@@ -52,19 +53,40 @@ public class Transport extends Itinerary{
         }
 
         if(startLocation != null){
-            this.startLocation = startLocation;
+            this.departureLocation = startLocation;
         }
 
         if(endLocation != null){
-            this.endLocation = endLocation;
+            this.arrivalLocation = endLocation;
         }
 
         if(startDateTime != null){
-            this.startDateTime = startDateTime;
+            this.departureDateTime = startDateTime;
         }
 
         if(endDateTime != null){
-            this.endDateTime = endDateTime;
+            this.arrivalDateTime = endDateTime;
         }
     }
+
+    public String getTransportation() {
+        return transportation;
+    }
+
+    public String getDepartureLocation() {
+        return departureLocation;
+    }
+
+    public String getArrivalLocation() {
+        return arrivalLocation;
+    }
+
+    public LocalDateTime getDepartureDateTime() {
+        return departureDateTime;
+    }
+
+    public LocalDateTime getArrivalDateTime() {
+        return arrivalDateTime;
+    }
+
 }

@@ -29,20 +29,20 @@ class TripServiceImplTest {
     @InjectMocks
     TripServiceImpl tripService;
 
-//    @Test
-//    void saveTrip() {
-//        Trip savedTrip = Trip.of(1L, "testName", LocalDate.now(), LocalDate.now(), false, null);
-//        given(tripRepository.save(any()))
-//                .willReturn(savedTrip);
-//        TripSaveRequest requestTrip = TripSaveRequest.builder()
-//                .name("testName")
-//                .startDate(LocalDate.now())
-//                .endDate(LocalDate.now())
-//                .isDomestic(false)
-//                .build();
-//        Trip trip = tripService.saveTrip(requestTrip);
-//        Assertions.assertThat(trip.getName());
-//    }
+    @Test
+    void saveTrip() {
+        Trip savedTrip = Trip.of(1L, "testName", LocalDate.now(), LocalDate.now(), false, null);
+        given(tripRepository.save(any()))
+                .willReturn(savedTrip);
+        TripSaveRequest requestTrip = TripSaveRequest.builder()
+                .name("testName")
+                .startDate(LocalDate.now().toString())
+                .endDate(LocalDate.now().toString())
+                .isDomestic(false)
+                .build();
+        Long savedId = tripService.saveTrip(requestTrip);
+        Assertions.assertThat(savedTrip.getName()).isEqualTo(requestTrip.getName());
+    }
 
     @Test
     void findAllTrips() {
@@ -75,11 +75,11 @@ class TripServiceImplTest {
 
         TripPatchRequest requestTrip = TripPatchRequest.builder()
                 .name("test1")
-                .startDate(LocalDate.now())
-                .endDate(LocalDate.now())
+                .startDate(LocalDate.now().toString())
+                .endDate(LocalDate.now().toString())
                 .isDomestic(false)
                 .build();
-        Long id = tripService.patchTrip(1L, requestTrip);
+        Long id = tripService.updateTrip(1L, requestTrip);
 
         Assertions.assertThat(id).isEqualTo(1L);
     }

@@ -8,8 +8,10 @@ import com.example.trip_itinerary.trip.dto.response.TripListFindResponse;
 import java.util.List;
 
 public interface TripService {
+
     Long saveTrip(TripSaveRequest tripSaveRequest);
     List<TripListFindResponse> findAllTrips();
     TripFindResponse getTripById(Long id);
-    Long patchTrip(Long id, TripPatchRequest tripPatchRequest);
+    Long updateTrip(Long id, TripPatchRequest tripPatchRequest);
+
 }

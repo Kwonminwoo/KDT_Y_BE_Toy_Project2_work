@@ -1,6 +1,6 @@
 package com.example.trip_itinerary.itinerary.controller;
 
-import com.example.trip_itinerary.itinerary.dto.request.ItinerarySaveRequest;
+import com.example.trip_itinerary.itinerary.dto.request.save.ItinerarySaveRequest;
 import com.example.trip_itinerary.itinerary.dto.request.update.ItineraryPatchRequest;
 import com.example.trip_itinerary.itinerary.service.ItineraryService;
 import org.springframework.validation.annotation.Validated;
@@ -25,4 +25,5 @@ public class ItineraryController {
     public Long patchItinerary(@PathVariable Long id, @RequestBody @Validated ItineraryPatchRequest itineraryPatchRequest){
         return itineraryService.patchItinerary(id, itineraryPatchRequest);
     }
+
 }

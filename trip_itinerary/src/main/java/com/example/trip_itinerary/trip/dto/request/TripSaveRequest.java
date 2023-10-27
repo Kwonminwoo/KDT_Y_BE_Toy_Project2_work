@@ -3,6 +3,8 @@ package com.example.trip_itinerary.trip.dto.request;
 
 import com.example.trip_itinerary.trip.domain.Trip;
 import com.example.trip_itinerary.util.DateUtil;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -14,7 +16,9 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class TripSaveRequest {
+
     @NotBlank(message = "여행 이름을 입력해주세요.")
     @Size(max = 30, message = "여행 이름은 최대 30자입니다.")
     private String name;

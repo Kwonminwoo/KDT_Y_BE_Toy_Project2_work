@@ -9,5 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class ItineraryNotFoundException extends RuntimeException{
+
     private ItineraryErrorCode errorCode;
+
 }

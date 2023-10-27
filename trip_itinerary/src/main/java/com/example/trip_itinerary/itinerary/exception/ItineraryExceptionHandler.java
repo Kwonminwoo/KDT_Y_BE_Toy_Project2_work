@@ -14,13 +14,14 @@ import java.util.List;
 
 @RestControllerAdvice(basePackageClasses = ItineraryController.class)
 public class ItineraryExceptionHandler {
+
     @ExceptionHandler(ItineraryNotFoundException.class)
     public ItineraryErrorResponse handle(ItineraryNotFoundException e) {
         return ItineraryErrorResponse.from(e.getErrorCode());
     }
 
-    @ExceptionHandler(InvalidDateTimeException.class)
-    public ItineraryErrorResponse handle(InvalidDateTimeException e){
+    @ExceptionHandler(InvalidDateTimeRangeException.class)
+    public ItineraryErrorResponse handle(InvalidDateTimeRangeException e){
         return ItineraryErrorResponse.from(e.getErrorCode());
     }
 

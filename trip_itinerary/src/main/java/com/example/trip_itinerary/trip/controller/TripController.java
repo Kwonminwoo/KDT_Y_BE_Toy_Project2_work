@@ -24,7 +24,6 @@ public class TripController {
 
     @PostMapping
     public Long saveTrip(@RequestBody @Validated TripSaveRequest tripSaveRequest) {
-        DateUtil.checkValidDateRange(tripSaveRequest.getStartDate(), tripSaveRequest.getEndDate());
         return tripService.saveTrip(tripSaveRequest);
     }
 
@@ -34,14 +33,14 @@ public class TripController {
     }
 
     @GetMapping("/{id}")
-    public TripFindResponse getDetailTripById(@PathVariable Long id) {
+    public TripFindResponse getTripById(@PathVariable Long id) {
         return tripService.getTripById(id);
     }
 
     @PatchMapping("/{id}")
-    public Long patchTripById(@PathVariable Long id, @RequestBody TripPatchRequest tripPatchRequest){
-        DateUtil.checkValidDateRange(tripPatchRequest.getStartDate(), tripPatchRequest.getEndDate());
-        return tripService.patchTrip(id, tripPatchRequest);
+    public Long updateTripById(@PathVariable Long id, @RequestBody TripPatchRequest tripPatchRequest){
+        return tripService.updateTrip(id, tripPatchRequest);
     }
+
 
 }

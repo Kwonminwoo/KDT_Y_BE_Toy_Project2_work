@@ -1,14 +1,16 @@
 package com.example.trip_itinerary.itinerary.dto.response;
 
 import com.example.trip_itinerary.itinerary.exception.ItineraryErrorCode;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
-@Setter
 @Builder
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class ItineraryErrorResponse {
+
     private String errorCode;
     private String message;
     private int status;
@@ -20,4 +22,5 @@ public class ItineraryErrorResponse {
                 .status(itineraryErrorCode.getStatus())
                 .build();
     }
+
 }

@@ -9,5 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class TripNotFoundException extends RuntimeException{
+
     private TripErrorCode errorCode;
+
 }

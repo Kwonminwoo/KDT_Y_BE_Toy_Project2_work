@@ -14,13 +14,14 @@ import java.util.List;
 
 @RestControllerAdvice(basePackageClasses = TripController.class)
 public class TripExceptionHandler {
+
     @ExceptionHandler(TripNotFoundException.class)
     public TripErrorResponse handle(TripNotFoundException e) {
         return TripErrorResponse.from(e.getErrorCode());
     }
 
-    @ExceptionHandler(InvalidDateException.class)
-    public TripErrorResponse handle(InvalidDateException e){
+    @ExceptionHandler(InvalidDateRangeException.class)
+    public TripErrorResponse handle(InvalidDateRangeException e){
         return TripErrorResponse.from(e.getErrorCode());
     }
 
