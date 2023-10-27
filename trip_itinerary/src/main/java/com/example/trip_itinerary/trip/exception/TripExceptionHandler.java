@@ -21,12 +21,12 @@ public class TripExceptionHandler {
     }
 
     @ExceptionHandler(InvalidDateRangeException.class)
-    public TripErrorResponse handle(InvalidDateRangeException e){
+    public TripErrorResponse handle(InvalidDateRangeException e) {
         return TripErrorResponse.from(e.getErrorCode());
     }
 
     @ExceptionHandler(InvalidDateFormatException.class)
-    public TripErrorResponse handle(InvalidDateFormatException e){
+    public TripErrorResponse handle(InvalidDateFormatException e) {
         return TripErrorResponse.from(e.getErrorCode());
     }
 

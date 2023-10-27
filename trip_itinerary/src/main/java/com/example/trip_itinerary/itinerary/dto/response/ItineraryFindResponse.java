@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Builder;
 import lombok.Getter;
+
 import java.time.LocalDateTime;
 
 @Getter
@@ -17,24 +18,35 @@ public class
 ItineraryFindResponse {
 
     private String name;
+
     private String transportation;
-    private String startLocation;
-    private String endLocation;
-    private LocalDateTime startDateTime;
-    private LocalDateTime endDateTime;
+
+    private String departureLocation;
+
+    private String arrivalLocation;
+
+    private LocalDateTime departureDateTime;
+
+    private LocalDateTime arrivalDateTime;
+
+    private LocalDateTime leaveDateTime;
+
     private String accommodationName;
+
     private LocalDateTime checkInTime;
+
     private LocalDateTime checkOutTime;
+
     private String location;
 
     public static ItineraryFindResponse fromEntity(Transport transport) {
         return ItineraryFindResponse.builder()
                 .name(transport.getName())
                 .transportation(transport.getTransportation())
-                .startLocation(transport.getDepartureLocation())
-                .endLocation(transport.getArrivalLocation())
-                .startDateTime(transport.getDepartureDateTime())
-                .startDateTime(transport.getArrivalDateTime())
+                .departureLocation(transport.getDepartureLocation())
+                .arrivalLocation(transport.getArrivalLocation())
+                .departureDateTime(transport.getDepartureDateTime())
+                .arrivalDateTime(transport.getArrivalDateTime())
                 .build();
     }
 
@@ -51,8 +63,8 @@ ItineraryFindResponse {
         return ItineraryFindResponse.builder()
                 .name(stay.getName())
                 .location(stay.getLocation())
-                .endDateTime(stay.getArrivalDateTime())
-                .startDateTime(stay.getLeaveDateTime())
+                .arrivalDateTime(stay.getArrivalDateTime())
+                .leaveDateTime(stay.getLeaveDateTime())
                 .build();
     }
 

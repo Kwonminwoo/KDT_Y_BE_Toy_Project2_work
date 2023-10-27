@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class InvalidDateTimeFormatException extends RuntimeException{
+public class InvalidDateTimeFormatException extends RuntimeException {
 
     private ItineraryErrorCode errorCode;
 

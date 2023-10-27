@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @DiscriminatorValue("transport")
-public class Transport extends Itinerary{
+public class Transport extends Itinerary {
 
     @Column(nullable = false, length = 30)
     private String transportation;
@@ -26,7 +26,8 @@ public class Transport extends Itinerary{
     @Column(name = "arrival_date_time", nullable = false)
     private LocalDateTime arrivalDateTime;
 
-    protected Transport() {}
+    protected Transport() {
+    }
 
     private Transport(String name, Trip trip, String transportation, String departureLocation, String arrivalLocation,
                       LocalDateTime departureDate, LocalDateTime arrivalDateTime) {
@@ -44,27 +45,27 @@ public class Transport extends Itinerary{
     }
 
     public void updateTransport(String name, String transportation, String startLocation,
-                                String endLocation, LocalDateTime startDateTime, LocalDateTime endDateTime){
+                                String endLocation, LocalDateTime startDateTime, LocalDateTime endDateTime) {
 
         super.updateItinerary(name);
 
-        if(transportation != null){
+        if (transportation != null) {
             this.transportation = transportation;
         }
 
-        if(startLocation != null){
+        if (startLocation != null) {
             this.departureLocation = startLocation;
         }
 
-        if(endLocation != null){
+        if (endLocation != null) {
             this.arrivalLocation = endLocation;
         }
 
-        if(startDateTime != null){
+        if (startDateTime != null) {
             this.departureDateTime = startDateTime;
         }
 
-        if(endDateTime != null){
+        if (endDateTime != null) {
             this.arrivalDateTime = endDateTime;
         }
     }

@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class InvalidDateFormatException extends RuntimeException{
+public class InvalidDateFormatException extends RuntimeException {
 
     private TripErrorCode errorCode;
 

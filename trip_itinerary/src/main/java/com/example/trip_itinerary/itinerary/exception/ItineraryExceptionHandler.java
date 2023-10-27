@@ -21,12 +21,12 @@ public class ItineraryExceptionHandler {
     }
 
     @ExceptionHandler(InvalidDateTimeRangeException.class)
-    public ItineraryErrorResponse handle(InvalidDateTimeRangeException e){
+    public ItineraryErrorResponse handle(InvalidDateTimeRangeException e) {
         return ItineraryErrorResponse.from(e.getErrorCode());
     }
 
     @ExceptionHandler(InvalidDateTimeFormatException.class)
-    public ItineraryErrorResponse handle(InvalidDateTimeFormatException e){
+    public ItineraryErrorResponse handle(InvalidDateTimeFormatException e) {
         return ItineraryErrorResponse.from(e.getErrorCode());
     }
 
@@ -44,6 +44,7 @@ public class ItineraryExceptionHandler {
 
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorMessage);
     }
+
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ItineraryErrorResponse handleHttpMessageNotReadableException(HttpMessageNotReadableException e) {
         return ItineraryErrorResponse.from(ItineraryErrorCode.NOT_MATCH_DATA_TYPE);

@@ -2,8 +2,6 @@ package com.example.trip_itinerary.itinerary.domain;
 
 import com.example.trip_itinerary.trip.domain.Trip;
 import jakarta.persistence.*;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -21,7 +19,8 @@ public class Itinerary {
     @JoinColumn(name = "trip_id", nullable = false)
     private Trip trip;
 
-    protected Itinerary(){}
+    protected Itinerary() {
+    }
 
     protected Itinerary(Long id, String name, Trip trip) {
         this.id = id;
@@ -29,7 +28,7 @@ public class Itinerary {
         this.trip = trip;
     }
 
-    public void updateItinerary(String name){
+    public void updateItinerary(String name) {
         if (name != null) {
             this.name = name;
         }

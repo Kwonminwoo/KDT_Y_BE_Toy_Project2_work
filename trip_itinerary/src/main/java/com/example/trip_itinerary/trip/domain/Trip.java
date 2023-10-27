@@ -12,7 +12,8 @@ import java.util.List;
 @Getter
 public class Trip {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false, length = 30)
@@ -30,7 +31,7 @@ public class Trip {
     @OneToMany(mappedBy = "trip", cascade = CascadeType.REMOVE)
     private List<Itinerary> itineraryList = new ArrayList<>();
 
-    protected Trip(){
+    protected Trip() {
     }
 
     private Trip(Long id, String name, LocalDate startDate, LocalDate endDate, boolean isDomestic, List<Itinerary> itineraryList) {
@@ -46,11 +47,11 @@ public class Trip {
         return new Trip(id, name, startDate, endDate, isDomestic, itineraryList);
     }
 
-    public void updateTrip(String name, LocalDate startDate, LocalDate endDate, Boolean isDomestic){
-        if(name != null){
+    public void updateTrip(String name, LocalDate startDate, LocalDate endDate, Boolean isDomestic) {
+        if (name != null) {
             this.name = name;
         }
-        if(startDate != null){
+        if (startDate != null) {
             this.startDate = startDate;
         }
         if (endDate != null) {

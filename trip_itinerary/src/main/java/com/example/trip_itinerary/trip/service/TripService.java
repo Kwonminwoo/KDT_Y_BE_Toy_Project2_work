@@ -10,8 +10,11 @@ import java.util.List;
 public interface TripService {
 
     Long saveTrip(TripSaveRequest tripSaveRequest);
+
     List<TripListFindResponse> findAllTrips();
+
     TripFindResponse getTripById(Long id);
+
     Long updateTrip(Long id, TripPatchRequest tripPatchRequest);
 
 }

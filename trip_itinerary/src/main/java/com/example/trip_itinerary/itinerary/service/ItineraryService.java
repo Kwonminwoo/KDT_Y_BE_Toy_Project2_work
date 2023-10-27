@@ -6,6 +6,7 @@ import com.example.trip_itinerary.itinerary.dto.request.update.ItineraryPatchReq
 public interface ItineraryService {
 
     Long saveItinerary(Long id, ItinerarySaveRequest itinerarySaveRequest);
+
     Long patchItinerary(Long id, ItineraryPatchRequest itineraryPatchRequest);
 
 }

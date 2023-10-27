@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class ItineraryNotFoundException extends RuntimeException{
+public class ItineraryNotFoundException extends RuntimeException {
 
     private ItineraryErrorCode errorCode;
 

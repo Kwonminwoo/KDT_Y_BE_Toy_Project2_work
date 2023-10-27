@@ -6,7 +6,6 @@ import com.example.trip_itinerary.trip.dto.request.TripSaveRequest;
 import com.example.trip_itinerary.trip.dto.response.TripFindResponse;
 import com.example.trip_itinerary.trip.dto.response.TripListFindResponse;
 import com.example.trip_itinerary.trip.service.TripService;
-import com.example.trip_itinerary.util.DateUtil;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +17,7 @@ public class TripController {
 
     private final TripService tripService;
 
-    public TripController(TripService tripService){
+    public TripController(TripService tripService) {
         this.tripService = tripService;
     }
 
@@ -28,7 +27,7 @@ public class TripController {
     }
 
     @GetMapping
-    public List<TripListFindResponse> getAllTrips(){
+    public List<TripListFindResponse> getAllTrips() {
         return tripService.findAllTrips();
     }
 
@@ -38,9 +37,8 @@ public class TripController {
     }
 
     @PatchMapping("/{id}")
-    public Long updateTripById(@PathVariable Long id, @RequestBody TripPatchRequest tripPatchRequest){
+    public Long updateTripById(@PathVariable Long id, @RequestBody TripPatchRequest tripPatchRequest) {
         return tripService.updateTrip(id, tripPatchRequest);
     }
-
 
 }
