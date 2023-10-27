@@ -2,11 +2,6 @@ package com.example.trip_itinerary.itinerary.exception;
 
 import com.example.trip_itinerary.itinerary.controller.ItineraryController;
 import com.example.trip_itinerary.itinerary.dto.response.ItineraryErrorResponse;
-import com.example.trip_itinerary.trip.controller.TripController;
-import com.example.trip_itinerary.trip.dto.response.TripErrorResponse;
-import com.example.trip_itinerary.trip.exception.InvalidDateFormatException;
-import com.example.trip_itinerary.trip.exception.TripErrorCode;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -19,13 +14,14 @@ import java.util.List;
 
 @RestControllerAdvice(basePackageClasses = ItineraryController.class)
 public class ItineraryExceptionHandler {
+
     @ExceptionHandler(ItineraryNotFoundException.class)
     public ItineraryErrorResponse handle(ItineraryNotFoundException e) {
         return ItineraryErrorResponse.from(e.getErrorCode());
     }
 
-    @ExceptionHandler(InvalidDateTimeException.class)
-    public ItineraryErrorResponse handle(InvalidDateTimeException e){
+    @ExceptionHandler(InvalidDateTimeRangeException.class)
+    public ItineraryErrorResponse handle(InvalidDateTimeRangeException e){
         return ItineraryErrorResponse.from(e.getErrorCode());
     }
 

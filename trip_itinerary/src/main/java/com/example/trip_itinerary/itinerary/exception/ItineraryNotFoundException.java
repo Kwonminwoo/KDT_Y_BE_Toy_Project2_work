@@ -1,7 +1,6 @@
 package com.example.trip_itinerary.itinerary.exception;
 
 
-import com.example.trip_itinerary.trip.exception.TripErrorCode;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,5 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class ItineraryNotFoundException extends RuntimeException{
+
     private ItineraryErrorCode errorCode;
+
 }

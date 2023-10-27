@@ -5,13 +5,13 @@ import jakarta.persistence.*;
 import lombok.Getter;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Getter
 public class Trip {
+
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -27,7 +27,7 @@ public class Trip {
     @Column(name = "is_domestic", nullable = false)
     private boolean isDomestic;
 
-    @OneToMany(mappedBy = "trip")
+    @OneToMany(mappedBy = "trip", cascade = CascadeType.REMOVE)
     private List<Itinerary> itineraryList = new ArrayList<>();
 
     protected Trip(){
@@ -60,4 +60,5 @@ public class Trip {
             this.isDomestic = isDomestic;
         }
     }
+
 }

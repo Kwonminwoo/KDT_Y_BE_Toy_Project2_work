@@ -7,10 +7,11 @@ import com.example.trip_itinerary.itinerary.domain.Stay;
 import com.example.trip_itinerary.itinerary.domain.Transport;
 import com.example.trip_itinerary.itinerary.dto.response.ItineraryFindResponse;
 import com.example.trip_itinerary.trip.domain.Trip;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +20,9 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class TripFindResponse {
+
     private Long id;
     private String name;
     private LocalDate startDate;
@@ -29,8 +32,10 @@ public class TripFindResponse {
 
     public static TripFindResponse fromEntity(Trip trip){
         List<ItineraryFindResponse> itineraryFindResponseList = new ArrayList<>();
+
         for(Itinerary itinerary : trip.getItineraryList()){
             ItineraryFindResponse itineraryResponse;
+
             if(itinerary instanceof Transport){
                 itineraryResponse = ItineraryFindResponse.fromEntity((Transport) itinerary);
             } else if (itinerary instanceof Accommodation) {
@@ -51,4 +56,5 @@ public class TripFindResponse {
                 .itineraryList(itineraryFindResponseList)
                 .build();
     }
+
 }

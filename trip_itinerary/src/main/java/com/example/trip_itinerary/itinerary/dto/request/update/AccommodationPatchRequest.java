@@ -1,22 +1,19 @@
 package com.example.trip_itinerary.itinerary.dto.request.update;
 
-import com.example.trip_itinerary.itinerary.domain.Accommodation;
-import com.example.trip_itinerary.trip.domain.Trip;
-import com.example.trip_itinerary.util.DateUtil;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-//@AllArgsConstructor
 @NoArgsConstructor
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class AccommodationPatchRequest extends ItineraryPatchRequest {
-    private String accommodationName;
-    private String checkIn;
-    private String checkOut;
 
-    public Accommodation toEntity(Trip trip) {
-        return Accommodation.of(super.getName(), trip, accommodationName, DateUtil.toLocalDateTime(checkIn), DateUtil.toLocalDateTime(checkOut));
-    }
+    private String accommodationName;
+    private String checkInTime;
+    private String checkOutTime;
+
 }

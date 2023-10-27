@@ -7,6 +7,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class InvalidDateTimeException extends RuntimeException {
+public class InvalidDateTimeRangeException extends RuntimeException {
+
     private ItineraryErrorCode errorCode;
+
 }

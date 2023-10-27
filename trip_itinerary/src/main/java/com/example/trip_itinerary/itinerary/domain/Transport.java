@@ -1,49 +1,50 @@
 package com.example.trip_itinerary.itinerary.domain;
 
 import com.example.trip_itinerary.trip.domain.Trip;
-import jakarta.persistence.*;
-import lombok.Getter;
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
 
 import java.time.LocalDateTime;
 
 @Entity
-@Getter
 @DiscriminatorValue("transport")
 public class Transport extends Itinerary{
+
     @Column(nullable = false, length = 30)
     private String transportation;
 
-    @Column(name = "start_location", nullable = false, length = 30)
-    private String startLocation;
+    @Column(name = "departure_location", nullable = false, length = 30)
+    private String departureLocation;
 
-    @Column(name = "end_location", nullable = false, length = 30)
-    private String endLocation;
+    @Column(name = "arrival_location", nullable = false, length = 30)
+    private String arrivalLocation;
 
-    @Column(name = "start_date", nullable = false)
-    private LocalDateTime startDate;
+    @Column(name = "departure_date_time", nullable = false)
+    private LocalDateTime departureDateTime;
 
-    @Column(name = "end_date", nullable = false)
-    private LocalDateTime endDate;
+    @Column(name = "arrival_date_time", nullable = false)
+    private LocalDateTime arrivalDateTime;
 
     protected Transport() {}
 
-    private Transport(String name, Trip trip, String transportation, String startLocation, String endLocation,
-                      LocalDateTime startDate, LocalDateTime endDate) {
+    private Transport(String name, Trip trip, String transportation, String departureLocation, String arrivalLocation,
+                      LocalDateTime departureDate, LocalDateTime arrivalDateTime) {
         super(null, name, trip);
         this.transportation = transportation;
-        this.startLocation = startLocation;
-        this.endLocation = endLocation;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.departureLocation = departureLocation;
+        this.arrivalLocation = arrivalLocation;
+        this.departureDateTime = departureDate;
+        this.arrivalDateTime = arrivalDateTime;
     }
 
     public static Transport of(String name, Trip trip, String transportation, String startLocation, String endLocation,
-                               LocalDateTime startDate, LocalDateTime endDate) {
-        return new Transport(name, trip, transportation, startLocation, endLocation, startDate, endDate);
+                               LocalDateTime startDateTime, LocalDateTime endDateTime) {
+        return new Transport(name, trip, transportation, startLocation, endLocation, startDateTime, endDateTime);
     }
 
     public void updateTransport(String name, String transportation, String startLocation,
-                                String endLocation, LocalDateTime startDate, LocalDateTime endDate){
+                                String endLocation, LocalDateTime startDateTime, LocalDateTime endDateTime){
 
         super.updateItinerary(name);
 
@@ -52,19 +53,40 @@ public class Transport extends Itinerary{
         }
 
         if(startLocation != null){
-            this.startLocation = startLocation;
+            this.departureLocation = startLocation;
         }
 
         if(endLocation != null){
-            this.endLocation = endLocation;
+            this.arrivalLocation = endLocation;
         }
 
-        if(startDate != null){
-            this.startDate = startDate;
+        if(startDateTime != null){
+            this.departureDateTime = startDateTime;
         }
 
-        if(endDate != null){
-            this.endDate = endDate;
+        if(endDateTime != null){
+            this.arrivalDateTime = endDateTime;
         }
     }
+
+    public String getTransportation() {
+        return transportation;
+    }
+
+    public String getDepartureLocation() {
+        return departureLocation;
+    }
+
+    public String getArrivalLocation() {
+        return arrivalLocation;
+    }
+
+    public LocalDateTime getDepartureDateTime() {
+        return departureDateTime;
+    }
+
+    public LocalDateTime getArrivalDateTime() {
+        return arrivalDateTime;
+    }
+
 }

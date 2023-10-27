@@ -1,41 +1,61 @@
 package com.example.trip_itinerary.itinerary.domain;
 
 import com.example.trip_itinerary.trip.domain.Trip;
-import jakarta.persistence.*;
-import lombok.Getter;
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
 
 import java.time.LocalDateTime;
 
 @Entity
-@Getter
 @DiscriminatorValue("stay")
 public class Stay extends Itinerary{
+
     @Column(nullable = false, length = 30)
     private String location;
 
-    @Column(nullable = false, name = "start_date")
-    private LocalDateTime startDate;
+    @Column(nullable = false, name = "arrival_date_time")
+    private LocalDateTime arrivalDateTime;
 
-    @Column(nullable = false, name = "end_date")
-    private LocalDateTime endDate;
+    @Column(nullable = false, name = "leave_date_time")
+    private LocalDateTime leaveDateTime;
 
     protected Stay() {}
 
-    private Stay(String name, Trip trip, String location, LocalDateTime startDate, LocalDateTime endDate) {
+    private Stay(String name, Trip trip, String location, LocalDateTime arrivalDateTime, LocalDateTime leaveDateTime) {
         super(null, name, trip);
         this.location = location;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.arrivalDateTime = arrivalDateTime;
+        this.leaveDateTime = leaveDateTime;
     }
 
-    public static Stay of(String name, Trip trip, String location, LocalDateTime startDate, LocalDateTime endDate) {
-        return new Stay(name, trip, location, startDate, endDate);
+    public static Stay of(String name, Trip trip, String location, LocalDateTime arrivalDateTime, LocalDateTime leaveDateTime) {
+        return new Stay(name, trip, location, arrivalDateTime, leaveDateTime);
     }
 
-    public void updateStay(String name, String location, LocalDateTime startDate, LocalDateTime endDate){
+    public void updateStay(String name, String location, LocalDateTime arrivalDateTime, LocalDateTime leaveDateTime){
         super.updateItinerary(name);
-        this.location = location;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        if (location != null) {
+            this.location = location;
+        }
+        if (arrivalDateTime != null) {
+            this.arrivalDateTime = arrivalDateTime;
+        }
+        if (leaveDateTime != null) {
+            this.leaveDateTime = leaveDateTime;
+        }
     }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public LocalDateTime getArrivalDateTime() {
+        return arrivalDateTime;
+    }
+
+    public LocalDateTime getLeaveDateTime() {
+        return leaveDateTime;
+    }
+
 }

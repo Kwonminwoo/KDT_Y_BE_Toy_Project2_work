@@ -2,13 +2,14 @@ package com.example.trip_itinerary.itinerary.domain;
 
 import com.example.trip_itinerary.trip.domain.Trip;
 import jakarta.persistence.*;
-import lombok.Getter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
-@Getter
 @Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name = "type")
+@DiscriminatorColumn(name = "type", length = 30)
 public class Itinerary {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -16,12 +17,11 @@ public class Itinerary {
     @Column(nullable = false, length = 30)
     private String name;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "trip_id", nullable = false)
     private Trip trip;
 
-    protected Itinerary(){
-    }
+    protected Itinerary(){}
 
     protected Itinerary(Long id, String name, Trip trip) {
         this.id = id;
@@ -34,5 +34,18 @@ public class Itinerary {
             this.name = name;
         }
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Trip getTrip() {
+        return trip;
+    }
+
 }
 
