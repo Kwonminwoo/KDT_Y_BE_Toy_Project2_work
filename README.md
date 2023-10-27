@@ -66,6 +66,7 @@
 <br/>
 
 ## 📝 [API 명세서 링크](https://kwonminwoos-organization.gitbook.io/trip-itinerary-project-api/)
+## 📝 [프로젝트 설계서 링크](https://brick-freckle-cec.notion.site/2-c7bdf106d0ce4b01b64c8681174f8b4f?pvs=4)
 
 <br/>
 
