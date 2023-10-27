@@ -10,7 +10,7 @@
   
 <br/>
 
-## [API 명세서 링크](https://kwonminwoos-organization.gitbook.io/trip-itinerary-project-api/)
+## 📝 [API 명세서 링크](https://kwonminwoos-organization.gitbook.io/trip-itinerary-project-api/)
 
 <br/>
 
