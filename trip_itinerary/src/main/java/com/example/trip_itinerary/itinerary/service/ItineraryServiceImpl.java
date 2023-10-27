@@ -16,6 +16,8 @@ import com.example.trip_itinerary.itinerary.exception.ItineraryErrorCode;
 import com.example.trip_itinerary.itinerary.exception.ItineraryNotFoundException;
 import com.example.trip_itinerary.itinerary.repository.ItineraryRepository;
 import com.example.trip_itinerary.trip.domain.Trip;
+import com.example.trip_itinerary.trip.exception.TripErrorCode;
+import com.example.trip_itinerary.trip.exception.TripNotFoundException;
 import com.example.trip_itinerary.trip.repository.TripRepository;
 import com.example.trip_itinerary.util.DateUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -42,7 +44,7 @@ public class ItineraryServiceImpl implements ItineraryService {
 
     @Override
     public Long saveItinerary(Long id, ItinerarySaveRequest itinerarySaveRequest) {
-        Trip foundTrip = tripRepository.findById(id).orElseThrow(() -> new ItineraryNotFoundException(ItineraryErrorCode.ITINERARY_NOT_FOUND));
+        Trip foundTrip = tripRepository.findById(id).orElseThrow(() -> new TripNotFoundException(TripErrorCode.TRIP_NOT_FOUND));
 
         Itinerary itinerary;
         if (itinerarySaveRequest instanceof TransportSaveRequest transportSaveRequest) {
