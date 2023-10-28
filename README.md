@@ -97,7 +97,10 @@
 
 ## ⚙️ 개발 환경
 
-
+실행 조건
+- application.yml 파일의 datasource username, password를 환경에 맞추어 설정
+- 연결 될 mysql에 trip_itinerary 데이터베이스 생성 후 실행
+<br>
 
 - Java 17
 - Spring 3.1.5
